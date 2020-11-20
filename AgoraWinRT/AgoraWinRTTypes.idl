@@ -1,0 +1,315 @@
+import "AgoraWinRTEnums.idl";
+
+namespace AgoraWinRT
+{
+    struct RtcStats {
+        UInt64 duration;
+        UInt64 txBytes;
+        UInt64 rxBytes;
+        UInt64 txAudioBytes;
+        UInt64 txVideoBytes;
+        UInt64 rxAudioBytes;
+        UInt64 rxVideoBytes;
+        UInt16 txKBitRate;
+        UInt16 rxKBitRate;
+        UInt16 rxAudioKBitRate;
+        UInt16 txAudioKBitRate;
+        UInt16 rxVideoKBitRate;
+        UInt16 txVideoKBitRate;
+        UInt16 lastmileDelay;
+        UInt16 txPacketLossRate;
+        UInt16 rxPacketLossRate;
+        UInt64 userCount;
+        Double cpuAppUsage;
+        Double cpuTotalUsage;
+        Int64 gatewayRtt;
+        Double memoryAppUsageRatio;
+        Double memoryTotalUsageRatio;
+        Int64 memoryAppUsageInKbytes;
+    };
+    struct VideoDimensions {
+        Int32 width;
+        Int32 height;
+    };
+    struct VideoEncoderConfiguration {
+        AgoraWinRT.VideoDimensions dimensions;
+        AgoraWinRT.FRAME_RATE frameRate;
+        Int32 minFrameRate;
+        Int32 bitrate;
+        Int32 minBitrate;
+        AgoraWinRT.ORIENTATION_MODE orientationMode;
+        AgoraWinRT.DEGRADATION_PREFERENCE degradationPreference;
+        AgoraWinRT.VIDEO_MIRROR_MODE_TYPE mirrorMode;
+    };
+    struct LocalAudioStats
+    {
+        Int32 numChannels;
+        Int32 sentSampleRate;
+        Int32 sentBitrate;
+        UInt16 txPacketLossRate;
+    };
+    struct RemoteAudioStats
+    {
+        UInt64 uid;
+        Int32 quality;
+        Int32 networkTransportDelay;
+        Int32 jitterBufferDelay;
+        Int32 audioLossRate;
+        Int32 numChannels;
+        Int32 receivedSampleRate;
+        Int32 receivedBitrate;
+        Int32 totalFrozenTime;
+        Int32 frozenRate;
+        Int32 totalActiveTime;
+        Int32 publishDuration;
+    };
+    struct LocalVideoStats
+    {
+        Int32 sentBitrate;
+        Int32 sentFrameRate;
+        Int32 encoderOutputFrameRate;
+        Int32 rendererOutputFrameRate;
+        Int32 targetBitrate;
+        Int32 targetFrameRate;
+        AgoraWinRT.QUALITY_ADAPT_INDICATION qualityAdaptIndication;
+        Int32 encodedBitrate;
+        Int32 encodedFrameWidth;
+        Int32 encodedFrameHeight;
+        Int32 encodedFrameCount;
+        AgoraWinRT.VIDEO_CODEC_TYPE codecType;
+        UInt16 txPacketLossRate;
+        Int32 captureFrameRate;
+    };
+    struct RemoteVideoStats
+    {
+        UInt64 uid;
+        Int32 delay;
+        Int32 width;
+        Int32 height;
+        Int32 receivedBitrate;
+        Int32 decoderOutputFrameRate;
+        Int32 rendererOutputFrameRate;
+        Int32 packetLossRate;
+        AgoraWinRT.REMOTE_VIDEO_STREAM_TYPE rxStreamType;
+        Int32 totalFrozenTime;
+        Int32 frozenRate;
+        Int32 totalActiveTime;
+        Int32 publishDuration;
+    };
+    struct BeautyOptions
+    {
+        AgoraWinRT.LIGHTENING_CONTRAST_LEVEL lighteningContrastLevel;
+        Single lighteningLevel;
+        Single smoothnessLevel;
+        Single rednessLevel;
+    };
+    struct TranscodingUser 
+    {
+        UInt64 uid;
+        UInt32 x;
+        UInt32 y;
+        UInt32 width;
+        UInt32 height;
+        UInt16 zOrder;
+        Single alpha;
+        UInt16 audioChannel;
+    };
+    struct RtcImage
+    {
+        String url;
+        Int32 x;
+        Int32 y;
+        Int32 width;
+        Int32 height;
+    };
+    struct LiveStreamAdvancedFeature
+    {
+        String LBHQ;
+        String VEO;
+        String featureName;
+        Boolean opened;
+    };
+    runtimeclass LiveTranscoding : Windows.Foundation.IClosable 
+    {
+        Int32 width;
+        Int32 height;
+        Int32 videoBitrate;
+        Int32 videoFramerate;
+        Boolean lowLatency;
+        Int32 videoGop;
+        AgoraWinRT.VIDEO_CODEC_PROFILE_TYPE videoCodecProfile;
+        UInt64 backgroundColor;
+        AgoraWinRT.TranscodingUser[] transcodingUsers;
+        String transcodingExtraInfo;
+        String metadata;
+        AgoraWinRT.RtcImage watermark;
+        AgoraWinRT.RtcImage backgroundImage;
+        AgoraWinRT.AUDIO_SAMPLE_RATE_TYPE audioSampleRate;
+        Int32 audioBitrate;
+        Int32 audioChannels;
+        AgoraWinRT.AUDIO_CODEC_PROFILE_TYPE audioCodecProfile;
+        AgoraWinRT.LiveStreamAdvancedFeature[] advancedFeatures;
+    };
+    struct ChannelMediaInfo
+    {
+        String name;
+        String token;
+        UInt64 uid;
+    };
+    runtimeclass ChannelMediaRelayConfiguration: Windows.Foundation.IClosable
+    {
+        AgoraWinRT.ChannelMediaInfo src;
+        AgoraWinRT.ChannelMediaInfo[] dest;
+    };
+    struct AudioVolumeInfo
+    {
+        UInt64 uid;
+        UInt8 volume;
+        UInt8 vad;
+        String channelId;
+    };
+    struct LastmileProbeConfig {
+        Boolean probeUplink;
+        Boolean probeDownlink;
+        UInt32 expectedUplinkBitrate;
+        UInt32 expectedDownlinkBitrate;
+    };
+    struct LastmileProbeOneWayResult {
+        UInt8 packetLossRate;
+        UInt64 jitter;
+        UInt64 availableBandwidth;
+    };
+    struct LastmileProbeResult {
+        AgoraWinRT.LASTMILE_PROBE_RESULT_STATE state;
+        AgoraWinRT.LastmileProbeOneWayResult uplinkReport;
+        AgoraWinRT.LastmileProbeOneWayResult downlinkReport;
+        UInt64 rtt;
+    };
+    enum VIDEO_BUFFER_TYPE
+    {
+        VIDEO_BUFFER_RAW_DATA = 1,
+    };
+    enum VIDEO_PIXEL_FORMAT
+    {
+        VIDEO_PIXEL_UNKNOWN = 0,
+        VIDEO_PIXEL_I420 = 1,
+        VIDEO_PIXEL_BGRA = 2,
+        VIDEO_PIXEL_NV21 = 3,
+        VIDEO_PIXEL_RGBA = 4,
+        VIDEO_PIXEL_IMC2 = 5,
+        VIDEO_PIXEL_ARGB = 7,
+        VIDEO_PIXEL_NV12 = 8,
+        VIDEO_PIXEL_I422 = 16,
+    };
+    runtimeclass ExternalVideoFrame : Windows.Foundation.IClosable
+    {
+        ExternalVideoFrame();
+        AgoraWinRT.VIDEO_BUFFER_TYPE type;
+        AgoraWinRT.VIDEO_PIXEL_FORMAT format;
+        UInt8[] buffer;
+        UInt32 stride;
+        UInt32 height;
+        UInt32 cropLeft;
+        UInt32 cropTop;
+        UInt32 cropRight;
+        UInt32 cropBottom;
+        UInt16 rotation;
+        Int64 timestamp;
+    };
+    runtimeclass AudioFrame : Windows.Foundation.IClosable
+    {
+        AudioFrame();
+        AgoraWinRT.AUDIO_FRAME_TYPE type;
+        UInt32 samples;  //number of samples for each channel in this frame
+        UInt8 bytesPerSample;  //number of bytes per sample: 2 for PCM16
+        UInt8 channels;  //number of channels (data are interleaved if stereo)
+        UInt32 samplesPerSec;  //sampling rate
+        UInt8[] buffer;  //data buffer
+        UInt64 renderTimeMs;
+        Int64 avsync_type;
+    };
+    enum METADATA_TYPE
+    {
+        UNKNOWN_METADATA = -1,
+         VIDEO_METADATA = 0,
+    };
+    runtimeclass Metadata: Windows.Foundation.IClosable
+    {
+        UInt64 uid;
+        UInt8[] buffer;
+        Int64 timestamp;
+    };
+    struct Rectangle
+    {
+        Int64 x;
+        Int64 y;
+        Int64 width;
+        Int64 height;
+    };
+    struct WatermarkOptions
+    {
+        Boolean visibleInPreview;
+        AgoraWinRT.Rectangle positionInLandscapeMode;
+        AgoraWinRT.Rectangle positionInProtraitMode;
+    };
+    struct EncryptionConfig
+    {
+        AgoraWinRT.ENCRYPTION_MODE mode;
+        String key;
+    };
+    runtimeclass Packet: Windows.Foundation.IClosable
+    {
+        UInt8[] buffer;
+    };
+
+    struct InjectStreamConfig 
+    {
+        Int64 width;
+        Int64 height;
+        Int16 videoGop;
+        Int16 videoFramerate;
+        Int64 videoBitrate;
+        AgoraWinRT.AUDIO_SAMPLE_RATE_TYPE audioSampleRate;
+        Int64 audioBitrate;
+        UInt8 audioChannels;
+    };
+    struct CameraCapturerConfiguration
+    {
+        AgoraWinRT.CAPTURER_OUTPUT_PREFERENCE prefernce;
+    };
+    runtimeclass VideoFrame : Windows.Foundation.IClosable
+    {
+        Boolean BeModified;
+        AgoraWinRT.VIDEO_FRAME_TYPE type;
+        UInt32 width;
+        UInt32 height;
+        UInt32 yStride;
+        UInt32 uStride;
+        UInt32 vStride;
+        UInt8[] yBuffer;
+        UInt8[] uBuffer;
+        UInt8[] vBuffer;
+        UInt16 rotation;
+        Int64 renderTimeMs;
+        Int64 avsync_type;
+    };
+    struct ChannelMediaOptions
+    {
+        Boolean autoSubscribeAudio;
+        Boolean autoSubscribeVideo;
+    };
+    runtimeclass VideoSourceConsumer
+    {
+        void ConsumeRawVideoFrame(UInt8[] buffer, AgoraWinRT.VIDEO_PIXEL_FORMAT type, UInt32 width, UInt32 height, UInt16 rotation, UInt64 timestamp);
+    };
+    interface VideoSource
+    {
+        Boolean OnInitialize(AgoraWinRT.VideoSourceConsumer consumer);
+        void OnDispose();
+        Boolean OnStart();
+        void OnStop();
+        AgoraWinRT.VIDEO_PIXEL_FORMAT GetBufferType();
+        AgoraWinRT.VIDEO_CAPTURE_TYPE GetVideoCaptureType();
+        AgoraWinRT.VIDEO_CONTENT_HINT GetVideoContentHint();
+    };
+}

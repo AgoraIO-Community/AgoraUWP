@@ -1,0 +1,118 @@
+﻿<Page
+    x:Class="AgoraUWPDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgoraUWPDemo"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid Margin="12" RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto" MinHeight="200"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Vendor Key:" Grid.Column="0" Grid.Row="0" />
+                <TextBox x:Name="txtVendorKey" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Text="3d09433bedce4d68b50d444772728d0d" />
+                <TextBlock Text="Channel Name:" Grid.Column="0" Grid.Row="1"/>
+                <TextBox x:Name="txtChannelName" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Text="666"/>
+                <TextBlock Text="Channel Token:" Grid.Column="0" Grid.Row="2"/>
+                <TextBox x:Name="txtChannelToken" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Text="" />
+                <TextBlock Text="调用结果:" Grid.Column="0" Grid.Row="3"/>
+                <TextBox x:Name="txtResult" Grid.Column="1" Grid.Row="3" 
+                     HorizontalAlignment="Stretch" MaxHeight="200" AcceptsReturn="True" 
+                     TextWrapping="Wrap" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+            </Grid>
+            <Grid Margin="12" ColumnSpacing="12" RowSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <ComboBox x:Name="cbMediaMode" Header="媒体采集模式" PlaceholderText="选择一个媒体采集模式" HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="0">
+                    <ComboBoxItem x:Name="cbiNormal" Content="使用SDK内部采集模式" IsSelected="True" />
+                    <ComboBoxItem x:Name="cbiAudioSelfCollect" Content="使用音频自采集" IsSelected="False" />
+                    <ComboBoxItem x:Name="cbiAudioSelfRender" Content="使用音频自渲染" IsSelected="False"/>
+                </ComboBox>
+                <ComboBox x:Name="cbResolution" Header="分辨率" HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="0">
+                    <ComboBoxItem Content="160x120" />
+                    <ComboBoxItem Content="320x240" />
+                    <ComboBoxItem Content="640x360" />
+                    <ComboBoxItem Content="640x480" IsSelected="True" />
+                    <ComboBoxItem Content="960x720" />
+                </ComboBox>
+                <ComboBox x:Name="cbFrameRate" Header="帧率" HorizontalAlignment="Stretch" Grid.Column="2" Grid.Row="0">
+                    <ComboBoxItem Content="1 fps"/>
+                    <ComboBoxItem Content="7 fps"/>
+                    <ComboBoxItem Content="10 fps"/>
+                    <ComboBoxItem Content="15 fps"/>
+                    <ComboBoxItem Content="24 fps" IsSelected="True"/>
+                    <ComboBoxItem Content="30 fps"/>
+                </ComboBox>
+                <ComboBox x:Name="cbBitrate" Header="码率" HorizontalAlignment="Stretch" Grid.Column="3" Grid.Row="0">
+                    <ComboBoxItem Content="100"/>
+                    <ComboBoxItem Content="200"/>
+                    <ComboBoxItem Content="400" IsSelected="True"/>
+                    <ComboBoxItem Content="800"/>
+                    <ComboBoxItem Content="1600"/>
+                </ComboBox>
+
+                <Button x:Name="btnJoinChannel" Content="加入频道" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Stretch"/>
+                <Button x:Name="btnLeaveChannel" Content="离开频道" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch"/>
+                <Button x:Name="btnMuteAudio" Content="开启静音" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Stretch" />
+                <Button x:Name="btnMuteVideo" Content="关闭视频" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Stretch"/>
+            </Grid>
+            <Button x:Name="btnTest" Content="测试代码" HorizontalAlignment="Stretch" Margin="15" Visibility="Collapsed"/>
+            <Grid Margin="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" MinHeight="200"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                    <TextBlock Text="本地视频："/>
+                    <Grid Height="320" Width="320" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.Background>
+                            <ImageBrush x:Name="localVideoBrush" />
+                        </Grid.Background>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" >
+                    <TextBlock Text="远程视频:"/>
+                    <Grid Height="320" Width="320" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.Background>
+                            <ImageBrush x:Name="remoteVideoBrush" />
+                        </Grid.Background>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Grid.Column="2" Grid.Row="0" >
+                    <TextBlock Text="测试视频:"/>
+                    <Grid Height="320" Width="320" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.Background>
+                            <ImageBrush x:Name="testVideoBrush" />
+                        </Grid.Background>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </Grid>
+</Page>

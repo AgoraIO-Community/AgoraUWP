@@ -1,0 +1,191 @@
+import "AgoraWinRTTypes.idl";
+import "AgoraWinRTEnums.idl";
+import "AgoraWinRTInterfaces.idl";
+import "AgoraWinRTChannel.idl";
+import "AgoraWinRTAudioDeviceManager.idl";
+
+namespace AgoraWinRT
+{
+	[default_interface]
+	unsealed runtimeclass AgoraRtc : Windows.Foundation.IClosable
+	{
+		AgoraRtc(String vendorKey);
+		
+		//注册RtcEngin事件处理器
+		void RegisterRtcEngineEventHandler(AgoraWinRT.AgoraRtcEventHandler handler);
+
+		//频道管理
+		Int16 SetChannelProfile(AgoraWinRT.CHANNEL_PROFILE_TYPE type);
+		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type);
+		Int16 JoinChannel(String token, String channel, String info, UInt64 uid);
+		Int16 SwitchChannel(String token, String channel);
+		Int16 LeaveChannel();
+		Int16 RenewToken(String token);
+		AgoraWinRT.CONNECTION_STATE_TYPE GetConnectionState();
+
+		//音频管理
+		Int16 EnableAudio();
+		Int16 DisableAudio();
+		Int16 SetAudioProfile(AgoraWinRT.AUDIO_PROFILE_TYPE profile, AgoraWinRT.AUDIO_SCENARIO_TYPE scenario);
+		Int16 AdjustRecordingSignalVolume(Int16 volume);
+		Int16 AdjustUserPlaybackSignalVolume(UInt64 uid, Int16 volume);
+		Int16 AdjustPlaybackSignalVolume(Int16 volume);
+		Int16 EnableLocalAudio(Boolean enabled);
+		Int16 MuteLocalAudioStream(Boolean muted);
+		Int16 MuteRemoteAudioStream(UInt64 uid, Boolean muted);
+		Int16 MuteAllRemoteAudioStreams(Boolean muted);
+		Int16 SetDefaultMuteAllRemoteAudioStreams(Boolean muted);
+
+		//视频管理
+		Int16 EnableVideo();
+		Int16 DisableVideo();
+		Int16 SetVideoEncoderConfiguration(AgoraWinRT.VideoEncoderConfiguration config);
+		Int16 MuteLocalVideoStream(Boolean muted);
+		Int16 MuteRemoteVideoStream(UInt64 uid, Boolean muted);
+		Int16 MuteAllRemoteVideoStream(Boolean muted);
+		Int16 SetDefaultMuteAllRemoteVideoStreams(Boolean muted);
+
+		//视频前处理及后处理
+		Int16 SetBeautyEffectOptions(Boolean enabled, AgoraWinRT.BeautyOptions options);
+
+		//音乐文件播放及混音
+		Int16 StartAudioMixing(String file, Boolean loopback, Boolean replace, Int32 cycle);
+		Int16 StopAudioMixing();
+		Int16 PauseAudioMixing();
+		Int16 ResumeAudioMixing();
+		Int16 AdjustAudioMixingVolume(UInt16 volume);
+		Int16 AdjustAudioMixingPlayoutVolume(UInt16 volume);
+		Int16 AdjustAudioMixingPublishVolume(UInt16 volume);
+		Int16 GetAudioMixingPublishVolume();
+		Int16 GetAudioMixingDuration();
+		Int16 GetAudioMixingCurrentPosition();
+		Int16 SetAudioMixingPosition(UInt64 pos);
+		Int16 SetAudioMixingPitch(Int16 pitch);
+
+		//音效文件播放管理
+		Int16 GetEffectsVolume();
+		Int16 SetEffectsVolume(UInt16 volume);
+		Int16 SetVolumeOfEffect(UInt64 soundId, UInt16 volume);
+		Int16 PlayEffect(UInt64 soundId, String file, Int16 loopCount, Single pitch, Single pan, Single gain, Boolean publish);
+		Int16 StopEffect(UInt64 soundId);
+		Int16 StopAllEffect();
+		Int16 PreloadEffect(UInt64 soundId, String file);
+		Int16 UnloadEffect(UInt64 soundId);
+		Int16 PauseEffect(UInt64 soundId);
+		Int16 PauseAllEffect();
+		Int16 ResumeEffect(UInt64 soundId);
+		Int16 ResumeAllEffect();
+
+		//变身与混响
+		Int16 SetLocalVoiceChanger(AgoraWinRT.VOICE_CHANGER_PRESET changer);
+		Int16 SetLocalVoiceReverbPreset(AgoraWinRT.AUDIO_REVERB_PRESET preset);
+		Int16 SetLocalVoicePitch(Single pitch);
+		Int16 SetLocalVoiceEqualization(AgoraWinRT.AUDIO_EQUALIZATION_BAND_FREQUENCY freq, Int16 gain);
+		Int16 SetLocalVoiceReverb(AgoraWinRT.AUDIO_REVERB_TYPE type, UInt64 value);
+
+		//听声辩位
+		Int16 EnableSoundPositionIndication(Boolean enabled);
+		Int16 SetRemoteVoicePosition(UInt64 uid, Single pan, Single gain);
+
+		//CDN推流
+		Int16 SetLiveTranscoding(AgoraWinRT.LiveTranscoding transcoding);
+		Int16 AddPublishStreamUrl(String url, Boolean enabled);
+		Int16 RemovePublishStreamUrl(String url);
+
+		//跨频道媒体流转发
+		Int16 StartChannelMediaRelay(AgoraWinRT.ChannelMediaRelayConfiguration config);
+		Int16 UpdateChannelMediaRelay(AgoraWinRT.ChannelMediaRelayConfiguration config);
+		Int16 StopChannelMediaRelay();
+
+		//音量提示
+		Int16 EnableAudioVolumeIndication(Int32 interval, UInt8 smooth, Boolean report);
+
+		//视频双流模式
+		Int16 EnableDualStreamMode(Boolean enabled);
+		Int16 SetRemoteVideoStreamType(UInt64 uid, AgoraWinRT.REMOTE_VIDEO_STREAM_TYPE type);
+		Int16 SetRemoteDefaultVideoStreamType(AgoraWinRT.REMOTE_VIDEO_STREAM_TYPE type);
+
+		//视频流回退
+		Int16 SetLocalPublishFallbackOption(AgoraWinRT.STREAM_FALLBACK_OPTIONS option);
+		Int16 SetRemoteSubscribeFallbackOption(AgoraWinRT.STREAM_FALLBACK_OPTIONS option);
+		Int16 SetRemoteUserPriority(UInt64 uid, AgoraWinRT.PRIORITY_TYPE type);
+
+		//通话前网络测试
+		Int16 StartEchoTest(UInt8 interval);
+		Int16 StopEchoTest();
+		Int16 EnableLastmileTest();
+		Int16 DisableLastmileTest();
+		Int16 StartLastmileProbeTest(AgoraWinRT.LastmileProbeConfig config);
+		Int16 StopLastmileProbeTest();
+
+		//自定义视频模块
+		Boolean SetVideoSource(AgoraWinRT.VideoSource source);
+
+		//视频自采集
+		Int16 SetExternalVideoSource(Boolean enable, Boolean useTexture);
+		Int16 PushVideoFrame(AgoraWinRT.ExternalVideoFrame frame);
+
+		//音频自采集
+		Int16 SetExternalAudioSource(Boolean enable, UInt32 sampleRate, UInt8 channels);
+		Int16 PushAudioFrame(AgoraWinRT.AudioFrame frame);
+
+		//音频自渲染
+		Int16 SetExternalAudioSink(Boolean enable, UInt32 sampleRate, UInt8 channels);
+		Int16 PullAudioFrame(AgoraWinRT.AudioFrame frame);
+
+		//媒体附属信息
+		void RegisterMediaMetadataObserver(AgoraWinRT.MetadataObserver observer);
+
+		//直播水印
+		Int16 AddVideoWatermark(String file, AgoraWinRT.WatermarkOptions option);
+		Int16 ClearVideoWatermark();
+
+		//加密
+		Int16 EnableEncryption(Boolean enable, AgoraWinRT.EncryptionConfig config);
+		void RegisterPacketObserver(AgoraWinRT.PacketObserver observer);
+
+		//音频录制
+		Int16 StartAudioRecording(String file, UInt32 sampleRate, AgoraWinRT.AUDIO_RECORDING_QUALITY_TYPE type);
+		Int16 StopAudioRecording();
+
+		//直播输入在线媒体流
+		Int16 AddInjectStreamUrl(String url, AgoraWinRT.InjectStreamConfig config);
+		Int16 RemoveInjectStreamUrl(String url);
+
+		//流消息
+		Int64 CreateDataStream(Boolean reliable, Boolean ordered);
+		Int16 SendStreamMessage(Int64 streamId, String data);
+
+		//其他音频控制
+		Int16 EnableLoopbackRecording(Boolean enabled, String deviceName);
+
+		//其他视频控制
+		Int16 SetCameraCapturerConfiguration(AgoraWinRT.CameraCapturerConfiguration config);
+
+		//其他方法
+		Int16 SendCustomReportMessage(String id, String category, String eventName, String label, Int64 value);
+		Int16 GetCallId(out String id);
+		Int16 Rate(String callId, UInt8 rating, String desc);
+		Int16 Complain(String callId, String desc);
+		String GetVersion(out Int64 build);
+		Int16 SetLogFile(String file);
+		Int16 SetLogFilter(UInt16 filter);
+		Int16 SetLogFileSize(UInt64 size);
+		String GetErrorDesc(Int64 code);
+
+		//原始音频数据
+		void RegisterAudioFrameObserver(AgoraWinRT.AudioFrameObserver observer);
+		Int16 SetRecordingAudioFrameParameters(UInt32 sampleRate, UInt8 channels, AgoraWinRT.RAW_AUDIO_FRAME_OP_MODE_TYPE mode, UInt32 samplesPerCall);
+		Int16 SetPlaybackAudioFrameParameters(UInt32 sampleRate, UInt8 channels, AgoraWinRT.RAW_AUDIO_FRAME_OP_MODE_TYPE mode, UInt32 samplesPerCall);
+		Int16 SetMixedAudioFrameParameters(UInt32 sampleRate, UInt32 samplesPerCall);
+
+		//原始视频数据
+		void RegisterVideoFrameObserver(AgoraWinRT.VideoFrameObserver observer);
+
+		//多频道
+		AgoraWinRT.Channel CreateChannel(String channel);
+
+		//设备管理
+		AgoraWinRT.AudioDeviceManager GetAudioDeviceManager();
+	};
+}

@@ -1,0 +1,116 @@
+import "AgoraWinRTTypes.idl";
+import "AgoraWinRTEnums.idl";
+
+namespace AgoraWinRT
+{
+	interface AgoraRtcEventHandler
+	{
+		//频道事件
+		void OnConnectionStateChanged(AgoraWinRT.CONNECTION_STATE_TYPE type, AgoraWinRT.CONNECTION_CHANGED_REASON_TYPE reason);
+		void OnJoinChannelSuccess(String channel, UInt64 uid, UInt32 elapsed);
+		void OnRejoinChannelSuccess(String channel, UInt64 uid, UInt32 elapsed);
+		void OnLeaveChannel(AgoraWinRT.RtcStats stats);
+		void OnClientRoleChanged(AgoraWinRT.CLIENT_ROLE_TYPE oldRole, AgoraWinRT.CLIENT_ROLE_TYPE newRole);
+		void OnUserJoined(UInt64 uid, UInt32 elapsed);
+		void OnUserOffline(UInt64 uid, AgoraWinRT.USER_OFFLINE_REASON_TYPE reason);
+		void OnNetworkTypeChanged(AgoraWinRT.NETWORK_TYPE type);
+		void OnConnectionLost();
+		void OnTokenPrivilegeWillExpire(String token);
+		void OnRequestToken();
+		//本地媒体事件
+		void OnLocalAudioStateChanged(AgoraWinRT.LOCAL_AUDIO_STREAM_STATE state, AgoraWinRT.LOCAL_AUDIO_STREAM_ERROR error);
+		void OnLocalVideoStateChanged(AgoraWinRT.LOCAL_VIDEO_STREAM_STATE state, AgoraWinRT.LOCAL_VIDEO_STREAM_ERROR error);
+		void OnFirstLocalAudioFramePublished(UInt32 elapsed);
+		void OnFirstLocalVideoFramePublished(UInt32 elapsed);
+		void OnFirstLocalVideoFrame(UInt32 width, UInt32 height, UInt32 elapsed);
+		void OnAudioPublishStateChanged(String channel, AgoraWinRT.STREAM_PUBLISH_STATE oldState, AgoraWinRT.STREAM_PUBLISH_STATE newState, UInt32 elapsed);
+		void OnVideoPublishStateChanged(String channel, AgoraWinRT.STREAM_PUBLISH_STATE oldState, AgoraWinRT.STREAM_PUBLISH_STATE newState, UInt32 elapsed);
+		//远端媒体事件
+		void OnRemoteAudioStateChanged(UInt64 uid, AgoraWinRT.REMOTE_AUDIO_STATE state, AgoraWinRT.REMOTE_AUDIO_STATE_REASON reason, UInt32 elapsed);
+		void OnRemoteVideoStateChanged(UInt64 uid, AgoraWinRT.REMOTE_VIDEO_STATE state, AgoraWinRT.REMOTE_VIDEO_STATE_REASON reason, UInt32 elapsed);
+		void OnFirstRemoteVideoFrame(UInt64 uid, UInt32 width, UInt32 height, UInt32 elapsed);
+		void OnAudioSubscribeStateChanged(String channel, UInt64 uid, AgoraWinRT.STREAM_SUBSCRIBE_STATE oldState, AgoraWinRT.STREAM_SUBSCRIBE_STATE newState, UInt32 elapsed);
+		void OnVideoSubscribeStateChanged(String channel, UInt64 uid, AgoraWinRT.STREAM_SUBSCRIBE_STATE oldState, AgoraWinRT.STREAM_SUBSCRIBE_STATE newState, UInt32 elapsed);
+		//数据统计事件
+		void OnRtcStats(AgoraWinRT.RtcStats stats);
+		void OnNetworkQuality(UInt64 uid, AgoraWinRT.QUALITY_TYPE txQuality, AgoraWinRT.QUALITY_TYPE rxQuality);
+		void OnLocalAudioStats(AgoraWinRT.LocalAudioStats stats);
+		void OnLocalVideoStats(AgoraWinRT.LocalVideoStats stats);
+		void OnRemoteAudioStats(AgoraWinRT.RemoteAudioStats stats);
+		void OnRemoteVideoStats(AgoraWinRT.RemoteVideoStats stats);
+		//音乐文件播放及混音
+		void OnAudioMixingStateChanged(AgoraWinRT.AUDIO_MIXING_STATE_TYPE state, AgoraWinRT.AUDIO_MIXING_ERROR_TYPE error);
+		void OnRemoteAudioMixingBegin();
+		void OnRemoteAudioMixingEnd();
+		//音效文件播放管理
+		void OnAudioEffectFinished(UInt64 soundId);
+		//CDN推流
+		void OnRtmpStreamingStateChanged(String url, AgoraWinRT.RTMP_STREAM_PUBLISH_STATE state, AgoraWinRT.RTMP_STREAM_PUBLISH_ERROR error);
+		void OnRtmpStreamingEvent(String url, AgoraWinRT.RTMP_STREAMING_EVENT code);
+		void OnTranscodingUpdated();
+		//跨频道媒体流转发
+		void OnChannelMediaRelayStateChanged(AgoraWinRT.CHANNEL_MEDIA_RELAY_STATE state, AgoraWinRT.CHANNEL_MEDIA_RELAY_ERROR error);
+		void OnChannelMediaRelayEvent(AgoraWinRT.CHANNEL_MEDIA_RELAY_EVENT code);
+		//音量提示
+		void OnAudioVolumeIndication(AgoraWinRT.AudioVolumeInfo[] speakers, UInt8 totalVolume);
+		void OnActiveSpeaker(UInt64 uid);
+		//视频流回退
+		void OnLocalPublishFallbackToAudioOnly(Boolean isFallbackOrRecover);
+		void OnRemoteSubscribeFallbackToAudioOnly(UInt64 uid, Boolean isFallbackOrRecover);
+		//通话前网络测试
+		void OnLastmileQuality(AgoraWinRT.QUALITY_TYPE quality);
+		void OnLastmileProbeResult(AgoraWinRT.LastmileProbeResult result);
+		//直播输入在线媒体流
+		void OnStreamInjectedStatus(String url, UInt64 uid, AgoraWinRT.INJECT_STREAM_STATUS status);
+		//流消息
+		void OnStreamMessage(UInt64 uid, Int64 streamId, String data);
+		void OnStreamMessageError(UInt64 uid, Int64 streamId, UInt32 error, UInt16 missed, UInt16 cached);
+		//其他事件
+		void OnWarning(Int64 code, String msg);
+		void OnError(Int64 code, String msg);
+		void OnApiCallExecuted(Int64 code, String api, String result);
+		//设备管理
+		void OnAudioDeviceStateChanged(String id, AgoraWinRT.MEDIA_DEVICE_TYPE type, AgoraWinRT.MEDIA_DEVICE_STATE_TYPE state);
+		void OnAudioDeviceVolumeChanged(AgoraWinRT.MEDIA_DEVICE_TYPE type, UInt8 volume, Boolean muted);
+		void OnVideoDeviceStateChanged(String id, AgoraWinRT.MEDIA_DEVICE_TYPE type, AgoraWinRT.MEDIA_DEVICE_STATE_TYPE state);
+	};
+
+	interface MetadataObserver
+	{
+		Int64 GetMaxMetadataSize();
+		Boolean OnReadyToSendMetadata(AgoraWinRT.Metadata metadata);
+		void OnMetadataReceived(AgoraWinRT.Metadata metadata);
+	};
+
+	interface AudioFrameObserver
+	{
+		Boolean OnRecordAudioFrame(AgoraWinRT.AudioFrame frame);
+		Boolean OnPlaybackAudioFrame(AgoraWinRT.AudioFrame frame);
+		Boolean OnMixedAudioFrame(AgoraWinRT.AudioFrame frame);
+		Boolean OnPlaybackAudioFrameBeforeMixing(UInt64 uid, AgoraWinRT.AudioFrame frame);
+		Boolean IsMultipleChannelAudioFrameWanted();
+		Boolean OnPlaybackAudioFrameBeforeMixingEx(String channel, UInt64 uid, AgoraWinRT.AudioFrame frame);
+	};
+
+	interface VideoFrameObserver
+	{
+		Boolean OnCaptureVideoFrame(AgoraWinRT.VideoFrame frame);
+		Boolean OnPreEncodeVideFrame(AgoraWinRT.VideoFrame frame);
+		Boolean OnRenderVideoFrame(UInt64 uid, AgoraWinRT.VideoFrame frame);
+		AgoraWinRT.VIDEO_FRAME_TYPE GetVideoFramePreference();
+		Boolean GetRotationApplied();
+		Boolean GetMirrorApplied();
+		Boolean GetSmoothRenderingEnabled();
+		UInt32 GetObservedFramePosition();
+		Boolean IsMultipleChannelVideoFrameWanted();
+		Boolean OnRenderVideoFrameEx(String channel, UInt64 uid, AgoraWinRT.VideoFrame frame);
+	};
+
+	interface PacketObserver
+	{
+		Boolean OnSendAudioPacket(AgoraWinRT.Packet packet);
+		Boolean OnSendVideoPacket(AgoraWinRT.Packet packet);
+		Boolean OnReceiveAudioPacket(AgoraWinRT.Packet packet);
+		Boolean OnReceiveVideoPacket(AgoraWinRT.Packet packet);
+	};
+}

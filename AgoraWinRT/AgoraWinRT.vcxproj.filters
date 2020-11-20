@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>accd3aa8-1ba0-4223-9bbe-0c431709210b</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{926ab91d-31b4-48c3-b9a4-e681349f27f0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="$(GeneratedFilesDir)module.g.cpp" />
+    <ClCompile Include="AgoraRtc.cpp" />
+    <ClCompile Include="LiveTranscoding.cpp" />
+    <ClCompile Include="ChannelMediaRelayConfiguration.cpp" />
+    <ClCompile Include="AudioFrame.cpp" />
+    <ClCompile Include="Metadata.cpp" />
+    <ClCompile Include="Packet.cpp" />
+    <ClCompile Include="VideoFrame.cpp" />
+    <ClCompile Include="Channel.cpp" />
+    <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="RawAudioFrameObsever.cpp" />
+    <ClCompile Include="RawVideoFrameObserver.cpp" />
+    <ClCompile Include="ExternalVideoFrame.cpp" />
+    <ClCompile Include="VideoSourceConsumer.cpp" />
+    <ClCompile Include="RawVideoSource.cpp" />
+    <ClCompile Include="AudioDeviceCollection.cpp" />
+    <ClCompile Include="AudioDeviceManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="AgoraRtc.h" />
+    <ClInclude Include="Utils.h" />
+    <ClInclude Include="LiveTranscoding.h" />
+    <ClInclude Include="ChannelMediaRelayConfiguration.h" />
+    <ClInclude Include="AudioFrame.h" />
+    <ClInclude Include="Metadata.h" />
+    <ClInclude Include="Packet.h" />
+    <ClInclude Include="VideoFrame.h" />
+    <ClInclude Include="Channel.h" />
+    <ClInclude Include="RawAudioFrameObsever.h" />
+    <ClInclude Include="RawVideoFrameObserver.h" />
+    <ClInclude Include="ExternalVideoFrame.h" />
+    <ClInclude Include="VideoSourceConsumer.h" />
+    <ClInclude Include="RawVideoSource.h" />
+    <ClInclude Include="AudioDeviceCollection.h" />
+    <ClInclude Include="AudioDeviceManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AgoraWinRT.def" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PropertySheet.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="AgoraWinRT.idl" />
+    <Midl Include="AgoraWinRTEnums.idl" />
+    <Midl Include="AgoraWinRTTypes.idl" />
+    <Midl Include="AgoraWinRTInterfaces.idl" />
+    <Midl Include="AgoraWinRTChannel.idl" />
+    <Midl Include="AgoraWinRTAudioDeviceManager.idl" />
+  </ItemGroup>
+</Project>

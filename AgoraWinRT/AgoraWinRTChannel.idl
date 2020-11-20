@@ -1,0 +1,86 @@
+import "AgoraWinRTEnums.idl";
+import "AgoraWinRTTypes.idl";
+import "AgoraWinRTInterfaces.idl";
+
+namespace AgoraWinRT
+{
+	interface ChannelEventHandler
+	{
+		void OnChannelWarning(AgoraWinRT.Channel channel, Int32 warn, String msg);
+		void OnChannelError(AgoraWinRT.Channel channel, Int32 error, String msg);
+		void OnJoinChannelSuccess(AgoraWinRT.Channel channel, UInt64 uid, Int32 elapsed);
+		void OnRejoinChannelSuccess(AgoraWinRT.Channel channel, UInt64 uid, Int32 elapsed);
+		void OnLeaveChannel(AgoraWinRT.Channel channel, AgoraWinRT.RtcStats stats);
+		void OnClientRoleChanged(AgoraWinRT.Channel channel, AgoraWinRT.CLIENT_ROLE_TYPE oldRole, AgoraWinRT.CLIENT_ROLE_TYPE newRole);
+		void OnUserJoined(AgoraWinRT.Channel channel, UInt64 uid, Int32 elapsed);
+		void OnUserOffline(AgoraWinRT.Channel channel, UInt64 uid, AgoraWinRT.USER_OFFLINE_REASON_TYPE reason);
+		void OnConnectionLost(AgoraWinRT.Channel channel);
+		void OnRequestToken(AgoraWinRT.Channel channel);
+		void OnTokenPrivilegeWillExpire(AgoraWinRT.Channel channel, String token);
+		void OnRtcStats(AgoraWinRT.Channel channel, AgoraWinRT.RtcStats stats);
+		void OnNetworkQuality(AgoraWinRT.Channel channel, UInt64 uid, AgoraWinRT.QUALITY_TYPE txQuality, AgoraWinRT.QUALITY_TYPE rxQuality);
+		void OnRemoteVideoStats(AgoraWinRT.Channel channel, AgoraWinRT.RemoteVideoStats stats);
+		void OnRemoteAudioStats(AgoraWinRT.Channel channel, AgoraWinRT.RemoteAudioStats stats);
+		void OnRemoteAudioStateChanged(AgoraWinRT.Channel channel, UInt64 uid, AgoraWinRT.REMOTE_AUDIO_STATE state, AgoraWinRT.REMOTE_AUDIO_STATE_REASON reason, Int32 elapsed);
+		void OnAudioPublishStateChanged(AgoraWinRT.Channel channel, AgoraWinRT.STREAM_PUBLISH_STATE oldState, AgoraWinRT.STREAM_PUBLISH_STATE newState, Int32 elapsed);
+		void OnVideoPublishStateChanged(AgoraWinRT.Channel channel, AgoraWinRT.STREAM_PUBLISH_STATE oldState, AgoraWinRT.STREAM_PUBLISH_STATE newState, Int32 elapsed);
+		void OnAudioSubscribeStateChanged(AgoraWinRT.Channel channel, UInt64 uid, AgoraWinRT.STREAM_SUBSCRIBE_STATE oldState, AgoraWinRT.STREAM_SUBSCRIBE_STATE newState, Int32 elapsed);
+		void OnVideoSubscribeStateChanged(AgoraWinRT.Channel channel, UInt64 uid, AgoraWinRT.STREAM_SUBSCRIBE_STATE oldState, AgoraWinRT.STREAM_SUBSCRIBE_STATE newState, Int32 elapsed);
+		void OnActiveSpeake(AgoraWinRT.Channel channel, UInt64 uid);
+		void OnVideoSizeChanged(AgoraWinRT.Channel channel, UInt64 uid, UInt32 width, UInt32 height, UInt16 rotation);
+		void OnRemoteVideoStateChanged(AgoraWinRT.Channel channel, UInt32 uid, AgoraWinRT.REMOTE_VIDEO_STATE state, AgoraWinRT.REMOTE_VIDEO_STATE_REASON reason, Int32 elapsed);
+		void OnStreamMessage(AgoraWinRT.Channel channel, UInt64 uid, Int64 streamId, String msg);
+		void OnStreamMessageError(AgoraWinRT.Channel channel, UInt64 uid, Int64 streamId, Int32 code, Int32 missed, Int32 cached);
+		void OnChannelMediaRelayStateChanged(AgoraWinRT.Channel channel, AgoraWinRT.CHANNEL_MEDIA_RELAY_STATE state, AgoraWinRT.CHANNEL_MEDIA_RELAY_ERROR err);
+		void OnChannelMediaRelayEvent(AgoraWinRT.Channel channel, AgoraWinRT.CHANNEL_MEDIA_RELAY_EVENT code);
+		void OnRtmpStreamingStateChanged(AgoraWinRT.Channel channel, String url, AgoraWinRT.RTMP_STREAM_PUBLISH_STATE state, AgoraWinRT.RTMP_STREAM_PUBLISH_ERROR err);
+		void OnRtmpStreamingEvent(AgoraWinRT.Channel channel, String url, AgoraWinRT.RTMP_STREAMING_EVENT eventCode);
+		void OnTranscodingUpdated(AgoraWinRT.Channel channel);
+		void OnStreamInjectedStatus(AgoraWinRT.Channel channel, String url, UInt64 uid, AgoraWinRT.INJECT_STREAM_STATUS status);
+		void OnLocalPublishFallbackToAudioOnly(AgoraWinRT.Channel channel, Boolean isFallbackOrRecover);
+		void OnRemoteSubscribeFallbackToAudioOnly(AgoraWinRT.Channel channel, UInt64 uid, Boolean isFallbackOrRecover);
+		void OnConnectionStateChanged(AgoraWinRT.Channel channel, AgoraWinRT.CONNECTION_STATE_TYPE state, AgoraWinRT.CONNECTION_CHANGED_REASON_TYPE reason);
+	};
+
+	runtimeclass Channel : Windows.Foundation.IClosable
+	{
+		void RegisterChannelEventHandler(AgoraWinRT.ChannelEventHandler handler);
+		Int16 JoinChannel(String token, String info, UInt64 uid, AgoraWinRT.ChannelMediaOptions options);
+		Int16 JoinChannelWithUserAccount(String token, String account, AgoraWinRT.ChannelMediaOptions options);
+		Int16 LeaveChannel();
+		Int16 Publish();
+		Int16 Unpublish();
+		String ChannelId();
+		Int16 GetCallId(out String callId);
+		Int16 renewToken(String token);
+		Int16 SetEncryptionSecret(String secret);
+		Int16 SetEncryptionMode(String mode);
+		Int16 EnableEncryption(Boolean enabled, AgoraWinRT.EncryptionConfig config);
+		void RegisterPacketObserver(AgoraWinRT.PacketObserver observer);
+		void RegisterMediaMetadataObserver(AgoraWinRT.MetadataObserver observer);
+		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type);
+		Int16 SetRemoteUserPriority(UInt64 uid, AgoraWinRT.PRIORITY_TYPE priority);
+		Int16 SetRemoteVoicePosition(UInt64 uid, Single pan, Single gain);
+		Int16 SetRemoteRenderMode(UInt64 uid, AgoraWinRT.RENDER_MODE_TYPE renderMode, AgoraWinRT.VIDEO_MIRROR_MODE_TYPE mirrorMode);
+		Int16 SetDefaultMuteAllRemoteAudioStreams(Boolean mute);
+		Int16 SetDefaultMuteAllRemoteVideoStreams(Boolean mute);
+		Int16 MuteAllRemoteAudioStreams(Boolean mute);
+		Int16 AdjustUserPlaybackSignalVolume(UInt64 uid, Int16 volume);
+		Int16 MuteRemoteAudioStream(UInt64 uid, Boolean mute);
+		Int16 MuteAllRemoteVideoStreams(Boolean mute);
+		Int16 MuteRemoteVideoStream(UInt64 uid, Boolean mute);
+		Int16 SetRemoteVideoStreamType(UInt64 uid, AgoraWinRT.REMOTE_VIDEO_STREAM_TYPE type);
+		Int16 SetRemoteDefaultVideoStreamType(AgoraWinRT.REMOTE_VIDEO_STREAM_TYPE type);
+		Int16 CreateDataStream(Boolean reliable, Boolean ordered);
+		Int16 SendStreamMessage(Int64 streamId, String data);
+		Int16 AddPublishStreamUrl(String url, Boolean transcodingEnabled);
+		Int16 RemovePublishStreamUrl(String url);
+		Int16 SetLiveTranscoding(AgoraWinRT.LiveTranscoding transcoding);
+		Int16 AddInjectStreamUrl(String url, AgoraWinRT.InjectStreamConfig config);
+		Int16 RemoveInjectStreamUrl(String url);
+		Int16 StartChannelMediaRelay(AgoraWinRT.ChannelMediaRelayConfiguration config);
+		Int16 UpdateChannelMediaRelay(AgoraWinRT.ChannelMediaRelayConfiguration config);
+		Int16 StopChannelMediaRelay();
+		AgoraWinRT.CONNECTION_STATE_TYPE GetConnectionState();
+	};
+}

@@ -1,0 +1,47 @@
+namespace AgoraWinRT
+{
+    runtimeclass AudioDeviceCollection : Windows.Foundation.IClosable
+    {
+        Int32 GetCount();
+        Int16 GetDevice(Int32 index, out String name, out String id);
+        Int16 SetDevice(String id);
+        Int16 SetApplicationVolume(UInt8 volume);
+        Int16 GetApplicationVolume(out UInt8 volume);
+        Int16 SetApplicationMute(Boolean muted);
+        Int16 IsApplicationMute(out Boolean muted);
+    };
+    runtimeclass AudioDeviceManager : Windows.Foundation.IClosable
+    {
+        AgoraWinRT.AudioDeviceCollection enumeratePlaybackDevices();
+        AgoraWinRT.AudioDeviceCollection enumerateRecordingDevices();
+
+        Int16 SetPlaybackDevice(String id);
+        Int16 GetPlaybackDevice(out String id);
+        Int16 GetPlaybackDeviceInfo(out String id, out String name);
+
+        Int16 SetRecordingDevice(String id);
+        Int16 GetRecordingDevice(out String id);
+        Int16 GetRecordingDeviceInfo(out String id, out String name);
+
+        Int16 StartPlaybackDeviceTest(String path);
+        Int16 StopPlaybackDeviceTest();
+
+        Int16 SetPlaybackDevieVolume(UInt8 volume);
+        Int16 GetPlaybackDeviceVolume(out UInt8 volume);
+
+        Int16 SetRecordingDeviceVolume(UInt8 volume);
+        Int16 GetRecordingDeviceVolume(out UInt8 volume);
+
+        Int16 SetPlaybackDeviceMute(Boolean muted);
+        Int16 GetPlaybackDeviceMute(out Boolean muted);
+
+        Int16 SetRecordingDeviceMute(Boolean muted);
+        Int16 GetRecordingDeviceMute(out Boolean muted);
+
+        Int16 StartRecordingDeviceTest(Int64 interval);
+        Int16 StopRecordingDeviceTest();
+
+        Int16 StartAudioDeviceLoopbackTest(Int64 interval);
+        Int16 StopAudioDeviceLoopbackTest();
+	}
+}
