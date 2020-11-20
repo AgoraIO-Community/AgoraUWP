@@ -72,7 +72,7 @@ AgoraWinRT::AgoraRtc is the core class of AgoraWinRT, which encapsulate AgoraRtc
 
 AgoraWinRT::AgoraRtc removes initialize and release functions. Instead of that, it automatically initializes the RTC engine when AgoraWinRT::AgoraRtc class is created in the constructor and automatically call the engine's release function when AgoraWinRT::AgoraRtc instance be destructed.
 
-At the same time, AgoraWinRT::AgoraRtc implements the IDispose interface, so users can use Using or directly call the dispose method to release resources. 
+At the same time, AgoraWinRT::AgoraRtc implements the IDispose interface, so users can use Using or directly call the dispose method to release resources.
 
 **NOTE: user can not use AgoraWinRT::AgoraRtc instance again after calling Dispose method, instead of that, the user must recreate a new instance of AgoraWinRT::AgoraRtc.**
 
@@ -84,13 +84,13 @@ At the same time, AgoraWinRT::AgoraRtc implements the IDispose interface, so use
 
 AgoraUWP is based on AgoraWinRT , implemented by C#. It provides VideoDeviceManager, permission request, video capture, and rendering in the UWP platform. At the same time,  there are three interfaces, AgoraRtcEventHandler, VideoFrameObserver, AudioFrameObserver, implemented by default, and the functions among them are converted to C# style events from the callback function.
 
-AgoraUWP uses the same function names and type names with Agora C++ like AgoraWinRT, except for the namespace. 
+AgoraUWP uses the same function names and type names with Agora C++ like AgoraWinRT, except for the namespace.
 
 #### AgoraUWP Project Files Description
 
 AgoraUWP is a DLL(Universal Windows) project
 
-| 文件名                     | 用途说明                                                     |
+| File Name                  | Description                                                  |
 | -------------------------- | ------------------------------------------------------------ |
 | AgoraUWP.cs                | The main file of AgoraUWP, which includes AgoraUWP.AgoraRtc class. This class implements three AgoraWinRT interfaces: AgoraWinRT::AgoraRtcEventHandler、AgoraWinRT::VideoFrameObserver、AgoraWinRT::AudioFrameObserver in privately, and transfer those intefaces to events. It also provide video capture and rendering capabilities on UWP platform, so the user can simply use this SDK to implements video and audio communication app like using Agora C++ SDK. |
 | AgoraUWPDelegate.cs        | include redefinition of AgoraWinRT::AgoraRtcEventHandler、AgoraWinRT::VideoFrameObserver、AgoraWinRT::AudioFrameObserver |
@@ -197,7 +197,7 @@ The VideoCanvas class is an abstract class, in which two Render functions are im
 
 #### MediaCaptureVideoSource
 
-Agora C++ provides a setVideoSource method, which allows users to provide their own VideoSource, but in Agora's example, the custom video capture is performed in two methods: setExternalVideoSource and pushVideoFrame. 
+Agora C++ provides a setVideoSource method, which allows users to provide their own VideoSource, but in Agora's example, the custom video capture is performed in two methods: setExternalVideoSource and pushVideoFrame.
 
 So this class only provides an example of a custom VideoSource based on GeneralMeidaCapturer. Users can refer to it to implement their own VideoSource.
 
@@ -287,7 +287,7 @@ UWP->>SDK: Dispose
 
 ![image-20201105165949740](images/image-20201105165949740.png)
 
-Start function is 
+Start function is
 
 ```c#
 private void StartEngineAndSelfAudioProcess()
@@ -346,7 +346,7 @@ private void AudioFrameArrivedEvent(AudioMediaFrame frame)
 }
 ```
 
-This example is different from [the official example](https://docs.agora.io/en/Video/custom_audio_windows?platform=Windows). [The official example](https://docs.agora.io/en/Video/custom_audio_windows?platform=Windows) uses a queue to ensure that the sound data won't be lost due to processing time issues, this example does not deal with this aspect. 
+This example is different from [the official example](https://docs.agora.io/en/Video/custom_audio_windows?platform=Windows). [The official example](https://docs.agora.io/en/Video/custom_audio_windows?platform=Windows) uses a queue to ensure that the sound data won't be lost due to processing time issues, this example does not deal with this aspect.
 
 ### Use Audio Self-rendering
 
@@ -378,7 +378,7 @@ UWP->>SDK: Dispose
 
 ![image-20201105171003324](images/image-20201105171003324.png)
 
-Start function is 
+Start function is
 
 ```c#
 private void StartEngineAndPullAudioProcess()
@@ -461,7 +461,7 @@ After compiling the AgoraWinRT and AgoraUWP projects, generate the debug or rele
 
 ![image-20201114120001641](images/image-20201114120001641.png)
 
-the required files is 
+the required files is
 
 1. AgoraUWP.dll
 2. AgoraWinRT.dll
