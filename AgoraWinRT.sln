@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16 
+# Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgoraUWP", "AgoraUWP\AgoraUWP.csproj", "{EE89E131-4EC6-4D78-B441-974D3D42A5C0}"
@@ -23,8 +23,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|Any CPU.Build.0 = Debug|x64
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|ARM.ActiveCfg = Debug|ARM
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|ARM.Build.0 = Debug|ARM
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Debug|ARM64.ActiveCfg = Debug|ARM64
@@ -43,7 +43,9 @@ Global
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Release|x64.Build.0 = Release|x64
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Release|x86.ActiveCfg = Release|x86
 		{EE89E131-4EC6-4D78-B441-974D3D42A5C0}.Release|x86.Build.0 = Release|x86
-		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|Any CPU.Build.0 = Debug|x64
+		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|Any CPU.Deploy.0 = Debug|x64
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|ARM.ActiveCfg = Debug|ARM
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|ARM.Build.0 = Debug|ARM
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -69,7 +71,8 @@ Global
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Release|x86.ActiveCfg = Release|x86
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Release|x86.Build.0 = Release|x86
 		{F52E5062-ED3E-449A-B17D-DA3E64E22231}.Release|x86.Deploy.0 = Release|x86
-		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|Any CPU.Build.0 = Debug|x64
 		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|ARM.ActiveCfg = Debug|ARM
 		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|ARM.Build.0 = Debug|ARM
 		{E0A7ED14-861F-4EB9-BA03-C1485EA79358}.Debug|ARM64.ActiveCfg = Debug|ARM64
