@@ -197,8 +197,7 @@ namespace AgoraUWP
         }
         public void SetRemoteRenderMode(ulong uid, RENDER_MODE_TYPE renderMode, VIDEO_MIRROR_MODE_TYPE mirrorMode)
         {
-            var videoCanvas = this.remoteVideos[uid];
-            if (videoCanvas != null)
+            if (this.remoteVideos.TryGetValue(uid, out var videoCanvas))
             {
                 videoCanvas.RenderMode = renderMode;
                 videoCanvas.MirrorMode = mirrorMode;
@@ -578,13 +577,15 @@ namespace AgoraUWP
         bool VideoFrameObserver.OnRenderVideoFrame(ulong uid, VideoFrame frame)
         {
             var result = OnRenderVideoFrame == null ? true : OnRenderVideoFrame(uid, frame);
-            var remoteVideo = this.remoteVideos[uid];
-            remoteVideo?.Render(frame);
-            if (firstRemoteVideoFrameElapsed.HasValue && remoteVideo != null)
+            if (this.remoteVideos.TryGetValue(uid, out var remoteVideo))
             {
-                TimeSpan elapsed = new TimeSpan(DateTime.Now.Ticks - firstRemoteVideoFrameElapsed.Value.Ticks);
-                OnFirstRemoteVideoFrame(uid, frame.width, frame.height, (uint)elapsed.TotalMilliseconds);
-                firstRemoteVideoFrameElapsed = null;
+                remoteVideo.Render(frame);
+                if (firstRemoteVideoFrameElapsed.HasValue)
+                {
+                    TimeSpan elapsed = new TimeSpan(DateTime.Now.Ticks - firstRemoteVideoFrameElapsed.Value.Ticks);
+                    OnFirstRemoteVideoFrame(uid, frame.width, frame.height, (uint)elapsed.TotalMilliseconds);
+                    firstRemoteVideoFrameElapsed = null;
+                }
             }
             return result;
         }
