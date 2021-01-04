@@ -457,5 +457,10 @@ namespace Utils {
 		return result;
 	}
 
-
+	agora::rtc::ClientRoleOptions To(winrt::AgoraWinRT::ClientRoleOptions const& value)
+	{
+		agora::rtc::ClientRoleOptions raw;
+		raw.audienceLatencyLevel = (agora::rtc::AUDIENCE_LATENCY_LEVEL_TYPE)value.audienceLatencyLevel();
+		return raw;
+	}
 }

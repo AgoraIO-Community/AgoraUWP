@@ -312,4 +312,8 @@ namespace AgoraWinRT
         AgoraWinRT.VIDEO_CAPTURE_TYPE GetVideoCaptureType();
         AgoraWinRT.VIDEO_CONTENT_HINT GetVideoContentHint();
     };
+    runtimeclass ClientRoleOptions
+    {
+        AgoraWinRT.AUDIENCE_LATENCY_LEVEL_TYPE audienceLatencyLevel;
+    };
 }

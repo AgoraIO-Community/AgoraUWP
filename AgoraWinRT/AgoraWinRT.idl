@@ -17,6 +17,7 @@ namespace AgoraWinRT
 		//频道管理
 		Int16 SetChannelProfile(AgoraWinRT.CHANNEL_PROFILE_TYPE type);
 		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type);
+		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type, AgoraWinRT.ClientRoleOptions options);
 		Int16 JoinChannel(String token, String channel, String info, UInt64 uid);
 		Int16 SwitchChannel(String token, String channel);
 		Int16 LeaveChannel();
@@ -82,6 +83,9 @@ namespace AgoraWinRT
 		Int16 SetLocalVoicePitch(Single pitch);
 		Int16 SetLocalVoiceEqualization(AgoraWinRT.AUDIO_EQUALIZATION_BAND_FREQUENCY freq, Int16 gain);
 		Int16 SetLocalVoiceReverb(AgoraWinRT.AUDIO_REVERB_TYPE type, UInt64 value);
+		Int16 SetVoiceBeautifierPreset(AgoraWinRT.VOICE_BEAUTIFIER_PRESET preset);
+		Int16 SetAudioEffectPreset(AgoraWinRT.AUDIO_EFFECT_PRESET preset);
+		Int16 SetAudioEffectParameters(AgoraWinRT.AUDIO_EFFECT_PRESET preset, UInt8 param1, UInt8 param2);
 
 		//听声辩位
 		Int16 EnableSoundPositionIndication(Boolean enabled);

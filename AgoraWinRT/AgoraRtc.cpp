@@ -54,6 +54,10 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setClientRole((agora::rtc::CLIENT_ROLE_TYPE)type);
 	}
+	int16_t AgoraRtc::SetClientRole(AgoraWinRT::CLIENT_ROLE_TYPE const& type, AgoraWinRT::ClientRoleOptions const& options)
+	{
+		return m_rtcEngine->setClientRole((agora::rtc::CLIENT_ROLE_TYPE)type, Utils::To(options));
+	}
 	int16_t AgoraRtc::JoinChannel(hstring const& token, hstring const& channel, hstring const& info, uint64_t uid)
 	{
 		return m_rtcEngine->joinChannel(Utils::To(token).c_str(), Utils::To(channel).c_str(), Utils::To(info).c_str(), uid);
@@ -272,6 +276,18 @@ namespace winrt::AgoraWinRT::implementation
 	int16_t AgoraRtc::SetLocalVoiceReverb(AgoraWinRT::AUDIO_REVERB_TYPE const& type, uint64_t value)
 	{
 		return m_rtcEngine->setLocalVoiceReverb((agora::rtc::AUDIO_REVERB_TYPE)type, value);
+	}
+	int16_t AgoraRtc::SetVoiceBeautifierPreset(AgoraWinRT::VOICE_BEAUTIFIER_PRESET const& preset)
+	{
+		return m_rtcEngine->setVoiceBeautifierPreset((agora::rtc::VOICE_BEAUTIFIER_PRESET)preset);
+	}
+	int16_t AgoraRtc::SetAudioEffectPreset(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset)
+	{
+		return m_rtcEngine->setAudioEffectPreset((agora::rtc::AUDIO_EFFECT_PRESET)preset);
+	}
+	int16_t AgoraRtc::SetAudioEffectParameters(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset, uint8_t param1, uint8_t param2)
+	{
+		return m_rtcEngine->setAudioEffectParameters((agora::rtc::AUDIO_EFFECT_PRESET)preset, param1, param2);
 	}
 	int16_t AgoraRtc::EnableSoundPositionIndication(bool enabled)
 	{
