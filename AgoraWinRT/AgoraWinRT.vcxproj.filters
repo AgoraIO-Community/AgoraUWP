@@ -28,6 +28,7 @@
     <ClCompile Include="RawVideoSource.cpp" />
     <ClCompile Include="AudioDeviceCollection.cpp" />
     <ClCompile Include="AudioDeviceManager.cpp" />
+    <ClCompile Include="ClientRoleOptions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="RawVideoSource.h" />
     <ClInclude Include="AudioDeviceCollection.h" />
     <ClInclude Include="AudioDeviceManager.h" />
+    <ClInclude Include="ClientRoleOptions.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AgoraWinRT.def" />

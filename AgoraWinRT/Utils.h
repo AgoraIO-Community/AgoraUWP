@@ -88,4 +88,6 @@ namespace Utils {
 	agora::rtc::ChannelMediaOptions To(winrt::AgoraWinRT::ChannelMediaOptions const& value);
 
 	void* To(winrt::array_view<const uint8_t> const& value);
+
+	agora::rtc::ClientRoleOptions To(winrt::AgoraWinRT::ClientRoleOptions const& value);
 }
