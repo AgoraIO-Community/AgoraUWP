@@ -128,7 +128,7 @@ namespace Utils {
 	winrt::com_array<winrt::AgoraWinRT::AudioVolumeInfo> To(const agora::rtc::AudioVolumeInfo* raw, int count) {
 		auto infos = winrt::com_array<winrt::AgoraWinRT::AudioVolumeInfo>(count);
 		for (int i = 0; i < count; i++) {
-			auto info = infos[i];
+			auto &info = infos[i];
 			info.channelId = Utils::To(raw[i].channelId);
 			info.uid = raw[i].uid;
 			info.vad = raw[i].vad;
