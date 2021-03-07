@@ -135,7 +135,7 @@ namespace AgoraUWP
                     externalFrame.buffer = buffer.Buffer.ToArray();
                     PushVideoFrame(externalFrame);
                 }
-                if (this.previewing && !this.joinChanneled) this.localVideo?.Render(frame);
+                if (this.previewing || this.joinChanneled) this.localVideo?.Render(frame);
                 if (this.videoTesting) this.testVideoCanvas?.Render(frame);
             }
         }
