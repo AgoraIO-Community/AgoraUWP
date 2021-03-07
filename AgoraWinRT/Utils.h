@@ -83,11 +83,15 @@ namespace Utils {
 
 	agora::rtc::InjectStreamConfig To(winrt::AgoraWinRT::InjectStreamConfig const& value);
 
-	agora::rtc::CameraCapturerConfiguration To(winrt::AgoraWinRT::CameraCapturerConfiguration const& config);
+	agora::rtc::CameraCapturerConfiguration To(winrt::AgoraWinRT::CameraCapturerConfiguration const& value);
 
 	agora::rtc::ChannelMediaOptions To(winrt::AgoraWinRT::ChannelMediaOptions const& value);
 
 	void* To(winrt::array_view<const uint8_t> const& value);
 
 	agora::rtc::ClientRoleOptions To(winrt::AgoraWinRT::ClientRoleOptions const& value);
+
+	agora::rtc::DataStreamConfig To(winrt::AgoraWinRT::DataStreamConfig const& value);
+
+	agora::rtc::LogConfig To(winrt::AgoraWinRT::LogConfig const& value);
 }

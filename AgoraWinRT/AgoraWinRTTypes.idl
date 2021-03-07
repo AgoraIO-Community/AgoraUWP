@@ -62,6 +62,9 @@ namespace AgoraWinRT
         Int32 frozenRate;
         Int32 totalActiveTime;
         Int32 publishDuration;
+        Int32 qoeQuality;
+        Int32 qualityChangedReason;
+        Int32 mosValue;
     };
     struct LocalVideoStats
     {
@@ -79,6 +82,7 @@ namespace AgoraWinRT
         AgoraWinRT.VIDEO_CODEC_TYPE codecType;
         UInt16 txPacketLossRate;
         Int32 captureFrameRate;
+        AgoraWinRT.CAPTURE_BRIGHTNESS_LEVEL_TYPE captureBrightnessLevel;
     };
     struct RemoteVideoStats
     {
@@ -276,6 +280,8 @@ namespace AgoraWinRT
     struct CameraCapturerConfiguration
     {
         AgoraWinRT.CAPTURER_OUTPUT_PREFERENCE prefernce;
+        UInt32 captureWidth;
+        UInt32 captureHeight;
     };
     runtimeclass VideoFrame : Windows.Foundation.IClosable
     {
@@ -315,5 +321,22 @@ namespace AgoraWinRT
     runtimeclass ClientRoleOptions
     {
         AgoraWinRT.AUDIENCE_LATENCY_LEVEL_TYPE audienceLatencyLevel;
+    };
+    struct DataStreamConfig
+    {
+        Boolean syncWithAudio;
+        Boolean ordered;
+    };
+    struct LogConfig
+    {
+        String filePath;
+        Int64 fileSize;
+        AgoraWinRT.LOG_LEVEL level;
+    };
+    struct EngineContext
+    {
+        String appId;
+        AgoraWinRT.AREA_CODE areaCode;
+        AgoraWinRT.LogConfig logConfig;
     };
 }

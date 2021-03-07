@@ -15,7 +15,7 @@ namespace winrt::AgoraWinRT::implementation
     {
         AgoraRtc() = default;
 
-        AgoraRtc(hstring const& vendorKey);
+        AgoraRtc(AgoraWinRT::EngineContext const& context);
     public:
         //RtcEngine�¼�����
         void RegisterRtcEngineEventHandler(AgoraWinRT::AgoraRtcEventHandler handler);
@@ -27,7 +27,9 @@ namespace winrt::AgoraWinRT::implementation
         int16_t SetClientRole(AgoraWinRT::CLIENT_ROLE_TYPE const& type);
         int16_t SetClientRole(AgoraWinRT::CLIENT_ROLE_TYPE const& type, AgoraWinRT::ClientRoleOptions const& options);
         int16_t JoinChannel(hstring const& token, hstring const& channel, hstring const& info, uint64_t uid);
+        int16_t JoinChannel(hstring const& token, hstring const& channel, hstring const& info, uint64_t uid, AgoraWinRT::ChannelMediaOptions const& options);
         int16_t SwitchChannel(hstring const& token, hstring const& channel);
+        int16_t SwitchChannel(hstring const& token, hstring const& channel, AgoraWinRT::ChannelMediaOptions const& options);
         int16_t LeaveChannel();
         int16_t RenewToken(hstring const& token);
         AgoraWinRT::CONNECTION_STATE_TYPE GetConnectionState();
@@ -79,7 +81,7 @@ namespace winrt::AgoraWinRT::implementation
         int16_t PauseEffect(uint64_t soundId);
         int16_t PauseAllEffect();
         int16_t ResumeEffect(uint64_t soundId);
-        int16_t ResumeAllEffect();
+        int16_t ResumeAllEffect();  
         //����������
         int16_t SetLocalVoiceChanger(AgoraWinRT::VOICE_CHANGER_PRESET const& changer);
         int16_t SetLocalVoiceReverbPreset(AgoraWinRT::AUDIO_REVERB_PRESET const& preset);
@@ -87,8 +89,10 @@ namespace winrt::AgoraWinRT::implementation
         int16_t SetLocalVoiceEqualization(AgoraWinRT::AUDIO_EQUALIZATION_BAND_FREQUENCY const& freq, int16_t gain);
         int16_t SetLocalVoiceReverb(AgoraWinRT::AUDIO_REVERB_TYPE const& type, uint64_t value);
         int16_t SetVoiceBeautifierPreset(AgoraWinRT::VOICE_BEAUTIFIER_PRESET const& preset);
+        int16_t SetVoiceBeautifierParameters(AgoraWinRT::VOICE_BEAUTIFIER_PRESET const& preset, int16_t param1, int16_t param2);
         int16_t SetAudioEffectPreset(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset);
         int16_t SetAudioEffectParameters(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset, uint8_t param1, uint8_t param2);
+        int16_t SetVoiceConversionPreset(AgoraWinRT::VOICE_CONVERSION_PRESET const& preset);
         //������λ
         int16_t EnableSoundPositionIndication(bool enabled);
         int16_t SetRemoteVoicePosition(uint64_t uid, float pan, float gain);
@@ -142,12 +146,15 @@ namespace winrt::AgoraWinRT::implementation
         int16_t RemoveInjectStreamUrl(hstring const& url);
         //����Ϣ
         int64_t CreateDataStream(bool reliable, bool ordered);
+        int64_t CreateDataStream(int64_t& streamId, AgoraWinRT::DataStreamConfig const& config);
         int16_t SendStreamMessage(int64_t streamId, hstring const& data);
         //������Ƶ����
         int16_t EnableLoopbackRecording(bool enabled, hstring const& deviceName);
         //������Ƶ����
         int16_t SetCameraCapturerConfiguration(AgoraWinRT::CameraCapturerConfiguration const& config);
         //��������
+        int16_t SetCloudProxy(AgoraWinRT::CLOUD_PROXY_TYPE const& type);
+        int16_t EnableDeepLearningDenoise(bool enabled);
         int16_t SendCustomReportMessage(hstring const& id, hstring const& category, hstring const& eventName, hstring const& label, int64_t value);
         int16_t GetCallId(hstring& id);
         int16_t Rate(hstring const& callId, uint8_t rating, hstring const& desc);
