@@ -753,7 +753,7 @@ namespace winrt::AgoraWinRT::implementation
 		if (m_handler) {
 			auto speakerArray = Utils::To(speakers, speakerNumber);
 			m_handler.OnAudioVolumeIndication(speakerArray, totalVolume);
-			speakerArray.clear();
+			//speakerArray.clear();
 		}
 	}
 	void AgoraRtc::onActiveSpeaker(agora::rtc::uid_t uid)
