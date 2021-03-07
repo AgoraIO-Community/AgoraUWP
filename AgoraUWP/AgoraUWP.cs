@@ -43,7 +43,7 @@ namespace AgoraUWP
             await mediaCapture.InitializeAsync();
         }
 
-        public AgoraRtc(string vendorKey): 
+        public AgoraRtc(string vendorKey) :
             base(new EngineContext()
             {
                 appId = vendorKey,
@@ -52,6 +52,17 @@ namespace AgoraUWP
             })
         {
             init();
+        }
+
+        public AgoraRtc(string vendorKey, AREA_CODE areaCode) :
+            base(new EngineContext()
+            {
+                appId = vendorKey,
+                areaCode = areaCode,
+                logConfig = new LogConfig() { filePath = String.Empty, fileSize = -1, level = LOG_LEVEL.LOG_LEVEL_INFO }
+            })
+        {
+
         }
 
         public AgoraRtc(EngineContext context): base(context)
@@ -151,7 +162,7 @@ namespace AgoraUWP
                     externalFrame.buffer = buffer.Buffer.ToArray();
                     PushVideoFrame(externalFrame);
                 }
-                if (this.previewing && !this.joinChanneled) this.localVideo?.Render(frame);
+                if (this.previewing || this.joinChanneled) this.localVideo?.Render(frame);
                 if (this.videoTesting) this.testVideoCanvas?.Render(frame);
             }
         }
