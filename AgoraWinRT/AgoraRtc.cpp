@@ -172,9 +172,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setBeautyEffectOptions(enabled, Utils::To(options));
 	}
-	int16_t AgoraRtc::StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle)
+	int16_t AgoraRtc::StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle, uint64_t startPos)
 	{
-		return m_rtcEngine->startAudioMixing(Utils::To(file).c_str(), loopback, replace, cycle);
+		return m_rtcEngine->startAudioMixing(Utils::To(file).c_str(), loopback, replace, cycle, startPos);
 	}
 	int16_t AgoraRtc::StopAudioMixing()
 	{
@@ -204,9 +204,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->getAudioMixingPublishVolume();
 	}
-	int16_t AgoraRtc::GetAudioMixingDuration()
+	uint64_t AgoraRtc::GetAudioMixingDuration(hstring const& file)
 	{
-		return m_rtcEngine->getAudioMixingDuration();
+		return m_rtcEngine->getAudioMixingDuration(Utils::To(file).c_str());
 	}
 	int16_t AgoraRtc::GetAudioMixingCurrentPosition()
 	{

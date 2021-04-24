@@ -43,7 +43,7 @@ namespace AgoraWinRT
 		Int16 EnableVideo();
 		Int16 DisableVideo();
 		Int16 SetVideoEncoderConfiguration(AgoraWinRT.VideoEncoderConfiguration config);
-		Int16 MuteLocalVideoStream(Boolean muted);
+		Int16 MuteLocalVideoStream(Boolean muted);	
 		Int16 MuteRemoteVideoStream(UInt64 uid, Boolean muted);
 		Int16 MuteAllRemoteVideoStream(Boolean muted);
 		Int16 SetDefaultMuteAllRemoteVideoStreams(Boolean muted);
@@ -52,7 +52,7 @@ namespace AgoraWinRT
 		Int16 SetBeautyEffectOptions(Boolean enabled, AgoraWinRT.BeautyOptions options);
 
 		//音乐文件播放及混音
-		Int16 StartAudioMixing(String file, Boolean loopback, Boolean replace, Int32 cycle);
+		Int16 StartAudioMixing(String file, Boolean loopback, Boolean replace, Int32 cycle, UInt64 startPos);
 		Int16 StopAudioMixing();
 		Int16 PauseAudioMixing();
 		Int16 ResumeAudioMixing();
@@ -60,7 +60,7 @@ namespace AgoraWinRT
 		Int16 AdjustAudioMixingPlayoutVolume(UInt16 volume);
 		Int16 AdjustAudioMixingPublishVolume(UInt16 volume);
 		Int16 GetAudioMixingPublishVolume();
-		Int16 GetAudioMixingDuration();
+		UInt64 GetAudioMixingDuration(String file);
 		Int16 GetAudioMixingCurrentPosition();
 		Int16 SetAudioMixingPosition(UInt64 pos);
 		Int16 SetAudioMixingPitch(Int16 pitch);

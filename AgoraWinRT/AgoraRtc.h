@@ -50,7 +50,7 @@ namespace winrt::AgoraWinRT::implementation
         int16_t MuteAllRemoteVideoStream(bool muted);
         int16_t SetDefaultMuteAllRemoteVideoStreams(bool muted);
         int16_t SetBeautyEffectOptions(bool enabled, AgoraWinRT::BeautyOptions const& options);
-        int16_t StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle);
+        int16_t StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle, uint64_t startPos);
         int16_t StopAudioMixing();
         int16_t PauseAudioMixing();
         int16_t ResumeAudioMixing();
@@ -58,7 +58,7 @@ namespace winrt::AgoraWinRT::implementation
         int16_t AdjustAudioMixingPlayoutVolume(uint16_t volume);
         int16_t AdjustAudioMixingPublishVolume(uint16_t volume);
         int16_t GetAudioMixingPublishVolume();
-        int16_t GetAudioMixingDuration();
+        uint64_t GetAudioMixingDuration(hstring const& file);
         int16_t GetAudioMixingCurrentPosition();
         int16_t SetAudioMixingPosition(uint64_t pos);
         int16_t SetAudioMixingPitch(int16_t pitch);
