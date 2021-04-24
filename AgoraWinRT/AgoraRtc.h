@@ -17,12 +17,9 @@ namespace winrt::AgoraWinRT::implementation
 
         AgoraRtc(AgoraWinRT::EngineContext const& context);
     public:
-        //RtcEngine�¼�����
         void RegisterRtcEngineEventHandler(AgoraWinRT::AgoraRtcEventHandler handler);
-        //ý��Ԫ���ݹ۲���
         void RegisterMediaMetadataObserver(AgoraWinRT::MetadataObserver observer);
     public:
-        //Ƶ������
         int16_t SetChannelProfile(AgoraWinRT::CHANNEL_PROFILE_TYPE const& type);
         int16_t SetClientRole(AgoraWinRT::CLIENT_ROLE_TYPE const& type);
         int16_t SetClientRole(AgoraWinRT::CLIENT_ROLE_TYPE const& type, AgoraWinRT::ClientRoleOptions const& options);
@@ -34,7 +31,6 @@ namespace winrt::AgoraWinRT::implementation
         int16_t RenewToken(hstring const& token);
         AgoraWinRT::CONNECTION_STATE_TYPE GetConnectionState();
         void Close();
-        //��Ƶ����
         int16_t EnableAudio();
         int16_t DisableAudio();
         int16_t SetAudioProfile(AgoraWinRT::AUDIO_PROFILE_TYPE const& profile, AgoraWinRT::AUDIO_SCENARIO_TYPE const& scenario);
@@ -46,7 +42,6 @@ namespace winrt::AgoraWinRT::implementation
         int16_t MuteRemoteAudioStream(uint64_t uid, bool muted);
         int16_t MuteAllRemoteAudioStreams(bool muted);
         int16_t SetDefaultMuteAllRemoteAudioStreams(bool muted);
-        //��Ƶ����
         int16_t EnableVideo();
         int16_t DisableVideo();
         int16_t SetVideoEncoderConfiguration(AgoraWinRT::VideoEncoderConfiguration const& config);
@@ -54,9 +49,7 @@ namespace winrt::AgoraWinRT::implementation
         int16_t MuteRemoteVideoStream(uint64_t uid, bool muted);
         int16_t MuteAllRemoteVideoStream(bool muted);
         int16_t SetDefaultMuteAllRemoteVideoStreams(bool muted);
-        //��Ƶǰ������������
         int16_t SetBeautyEffectOptions(bool enabled, AgoraWinRT::BeautyOptions const& options);
-        //�����ļ����ż�����
         int16_t StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle);
         int16_t StopAudioMixing();
         int16_t PauseAudioMixing();
@@ -185,7 +178,6 @@ namespace winrt::AgoraWinRT::implementation
         AgoraWinRT::implementation::RawVideoFrameObserver* m_rawVideoFrameObserver{ nullptr };
         AgoraWinRT::implementation::RawVideoSource* m_videoSource{ nullptr };
     private:
-        //Ƶ�������¼�
         void onConnectionStateChanged(agora::rtc::CONNECTION_STATE_TYPE type, agora::rtc::CONNECTION_CHANGED_REASON_TYPE reason) override;
         void onJoinChannelSuccess(const char* channel, agora::rtc::uid_t uid, int elapsed) override;
         void onRejoinChannelSuccess(const char* channel, agora::rtc::uid_t uid, int elapsed) override;
@@ -197,7 +189,6 @@ namespace winrt::AgoraWinRT::implementation
         void onConnectionLost() override;
         void onTokenPrivilegeWillExpire(const char* token) override;
         void onRequestToken() override;
-        ////����ý���¼�
         void onLocalAudioStateChanged(agora::rtc::LOCAL_AUDIO_STREAM_STATE state, agora::rtc::LOCAL_AUDIO_STREAM_ERROR error) override;
         void onLocalVideoStateChanged(agora::rtc::LOCAL_VIDEO_STREAM_STATE state, agora::rtc::LOCAL_VIDEO_STREAM_ERROR error) override;
         void onFirstLocalAudioFramePublished(int elapsed) override;
@@ -205,59 +196,44 @@ namespace winrt::AgoraWinRT::implementation
         void onFirstLocalVideoFrame(int width, int height, int elapsed) override;
         void onAudioPublishStateChanged(const char* channel, agora::rtc::STREAM_PUBLISH_STATE oldState, agora::rtc::STREAM_PUBLISH_STATE newState, int elapsed) override;
         void onVideoPublishStateChanged(const char* channel, agora::rtc::STREAM_PUBLISH_STATE oldState, agora::rtc::STREAM_PUBLISH_STATE newState, int elapsed) override;
-        ////Զ��ý���¼�
         void onRemoteAudioStateChanged(agora::rtc::uid_t uid, agora::rtc::REMOTE_AUDIO_STATE state, agora::rtc::REMOTE_AUDIO_STATE_REASON reason, int elapsed);
         void onRemoteVideoStateChanged(agora::rtc::uid_t uid, agora::rtc::REMOTE_VIDEO_STATE state, agora::rtc::REMOTE_VIDEO_STATE_REASON reason, int elapsed);
         void onFirstRemoteVideoFrame(agora::rtc::uid_t uid, int width, int height, int elapsed);
         void onAudioSubscribeStateChanged(const char* channel, agora::rtc::uid_t uid, agora::rtc::STREAM_SUBSCRIBE_STATE oldState, agora::rtc::STREAM_SUBSCRIBE_STATE newState, int elapsed);
         void onVideoSubscribeStateChanged(const char* channel, agora::rtc::uid_t uid, agora::rtc::STREAM_SUBSCRIBE_STATE oldState, agora::rtc::STREAM_SUBSCRIBE_STATE newState, int elapsed);
-        ////����ͳ���¼�
         void onRtcStats(const agora::rtc::RtcStats& stats) override;
         void onNetworkQuality(agora::rtc::uid_t uid, int txQuality, int rxQuality) override;
         void onLocalAudioStats(const agora::rtc::LocalAudioStats& stats) override;
         void onLocalVideoStats(const agora::rtc::LocalVideoStats& stats) override;
         void onRemoteAudioStats(const agora::rtc::RemoteAudioStats& stats) override;
         void onRemoteVideoStats(const agora::rtc::RemoteVideoStats& stats) override;
-        ////�����ļ����ż�����
-        void onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_ERROR_TYPE error) override;
+        void onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_REASON_TYPE reason) override;
         void onRemoteAudioMixingBegin() override;
         void onRemoteAudioMixingEnd() override;
-        ////��Ч�ļ����ż�����
         void onAudioEffectFinished(int soundId) override;
-        //CDN����
         void onRtmpStreamingStateChanged(const char* url, agora::rtc::RTMP_STREAM_PUBLISH_STATE state, agora::rtc::RTMP_STREAM_PUBLISH_ERROR error) override;
         void onRtmpStreamingEvent(const char* url, agora::rtc::RTMP_STREAMING_EVENT code) override;
         void onTranscodingUpdated() override;
-        //��Ƶ��ý����ת��
         void onChannelMediaRelayStateChanged(agora::rtc::CHANNEL_MEDIA_RELAY_STATE state, agora::rtc::CHANNEL_MEDIA_RELAY_ERROR error) override;
         void onChannelMediaRelayEvent(agora::rtc::CHANNEL_MEDIA_RELAY_EVENT code) override;
-        //������ʾ
         void onAudioVolumeIndication(const agora::rtc::AudioVolumeInfo* speakers, unsigned int speakerNumber, int totalVolume) override;
         void onActiveSpeaker(agora::rtc::uid_t uid) override;
-        ////��Ƶ������
         void onLocalPublishFallbackToAudioOnly(bool isFallbackOrRecover) override;
         void onRemoteSubscribeFallbackToAudioOnly(agora::rtc::uid_t uid, bool isFallbackOrRecover) override;
-        //ͨ��ǰ��������
         void onLastmileQuality(int quality) override;
         void onLastmileProbeResult(const agora::rtc::LastmileProbeResult& result) override;
-        //ֱ����������ý����
         void onStreamInjectedStatus(const char* url, agora::rtc::uid_t uid, int status) override;
-        ////����Ϣ
         void onStreamMessage(agora::rtc::uid_t uid, int streamId, const char* data, size_t length) override;
         void onStreamMessageError(agora::rtc::uid_t uid, int streamId, int code, int missed, int cached) override;
-        ////�����¼�
         void onWarning(int warn, const char* msg) override;
         void onError(int err, const char* msg) override;
         void onApiCallExecuted(int err, const char* api, const char* result) override;
-        //�豸����
         void onAudioDeviceStateChanged(const char* deviceId, int deviceType, int deviceState) override;
         void onAudioDeviceVolumeChanged(agora::rtc::MEDIA_DEVICE_TYPE type, int volume, bool muted) override;
     private:
-        //IMetadataObserverʵ�ֲ���
         int getMaxMetadataSize() override;
         bool onReadyToSendMetadata(agora::rtc::IMetadataObserver::Metadata& metadata) override;
         void onMetadataReceived(const agora::rtc::IMetadataObserver::Metadata& metadata) override;
-        //IPacketObserverʵ�ֲ���
         bool onSendAudioPacket(Packet& packet) override;
         bool onSendVideoPacket(Packet& packet) override;
         bool onReceiveAudioPacket(Packet& packet) override;

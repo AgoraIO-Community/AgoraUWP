@@ -709,9 +709,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		if (m_handler) m_handler.OnRemoteVideoStats(Utils::To(stats));
 	}
-	void AgoraRtc::onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_ERROR_TYPE error)
+	void AgoraRtc::onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_REASON_TYPE reason)
 	{
-		if (m_handler) m_handler.OnAudioMixingStateChanged((AgoraWinRT::AUDIO_MIXING_STATE_TYPE)state, (AgoraWinRT::AUDIO_MIXING_ERROR_TYPE)error);
+		if (m_handler) m_handler.OnAudioMixingStateChanged((AgoraWinRT::AUDIO_MIXING_STATE_TYPE)state, (AgoraWinRT::AUDIO_MIXING_REASON_TYPE)reason);
 	}
 	void AgoraRtc::onRemoteAudioMixingBegin()
 	{

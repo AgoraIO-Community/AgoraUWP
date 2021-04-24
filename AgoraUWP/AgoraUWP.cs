@@ -450,7 +450,7 @@ namespace AgoraUWP
             OnRemoteVideoStats?.Invoke(stats);
         }
 
-        void AgoraRtcEventHandler.OnAudioMixingStateChanged(AUDIO_MIXING_STATE_TYPE state, AUDIO_MIXING_ERROR_TYPE error)
+        void AgoraRtcEventHandler.OnAudioMixingStateChanged(AUDIO_MIXING_STATE_TYPE state, AUDIO_MIXING_REASON_TYPE error)
         {
             OnAudioMixingStateChanged?.Invoke(state, error);
         }
