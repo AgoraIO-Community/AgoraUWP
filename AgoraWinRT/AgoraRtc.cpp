@@ -497,6 +497,10 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->enableLoopbackRecording(enabled, Utils::To(deviceName).c_str());
 	}
+	int16_t AgoraRtc::AdjustLoopbackRecordingSignalVolume(int16_t volume)
+	{
+		return m_rtcEngine->adjustLoopbackRecordingSignalVolume(volume);
+	}
 	int16_t AgoraRtc::SetCameraCapturerConfiguration(AgoraWinRT::CameraCapturerConfiguration const& config)
 	{
 		return m_rtcEngine->setCameraCapturerConfiguration(Utils::To(config));

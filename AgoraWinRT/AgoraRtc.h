@@ -119,33 +119,24 @@ namespace winrt::AgoraWinRT::implementation
         //��Ƶ�Բɼ�
         int16_t SetExternalVideoSource(bool enable, bool useTexture);
         int16_t PushVideoFrame(AgoraWinRT::ExternalVideoFrame const& frame);
-        //��Ƶ�Բɼ�
         int16_t SetExternalAudioSource(bool enable, uint32_t sampleRate, uint8_t channels);
         int16_t PushAudioFrame(AgoraWinRT::AudioFrame const& frame);
-        //��Ƶ����Ⱦ
         int16_t SetExternalAudioSink(bool enable, uint32_t sampleRate, uint8_t channels);
         int16_t PullAudioFrame(AgoraWinRT::AudioFrame const& frame);
-        //ֱ��ˮӡ
         int16_t AddVideoWatermark(hstring const& file, AgoraWinRT::WatermarkOptions const& option);
         int16_t ClearVideoWatermark();
-        //����
         int16_t EnableEncryption(bool enable, AgoraWinRT::EncryptionConfig const& config);
         void RegisterPacketObserver(AgoraWinRT::PacketObserver const& observer);
-        //��Ƶ¼��
         int16_t StartAudioRecording(hstring const& file, uint32_t sampleRate, AgoraWinRT::AUDIO_RECORDING_QUALITY_TYPE const& type);
         int16_t StopAudioRecording();
-        //ֱ����������ý����
         int16_t AddInjectStreamUrl(hstring const& url, AgoraWinRT::InjectStreamConfig const& config);
         int16_t RemoveInjectStreamUrl(hstring const& url);
-        //����Ϣ
         int64_t CreateDataStream(bool reliable, bool ordered);
         int64_t CreateDataStream(int64_t& streamId, AgoraWinRT::DataStreamConfig const& config);
         int16_t SendStreamMessage(int64_t streamId, hstring const& data);
-        //������Ƶ����
         int16_t EnableLoopbackRecording(bool enabled, hstring const& deviceName);
-        //������Ƶ����
+        int16_t AdjustLoopbackRecordingSignalVolume(int16_t volume);
         int16_t SetCameraCapturerConfiguration(AgoraWinRT::CameraCapturerConfiguration const& config);
-        //��������
         int16_t SetCloudProxy(AgoraWinRT::CLOUD_PROXY_TYPE const& type);
         int16_t EnableDeepLearningDenoise(bool enabled);
         int16_t SendCustomReportMessage(hstring const& id, hstring const& category, hstring const& eventName, hstring const& label, int64_t value);
@@ -157,16 +148,12 @@ namespace winrt::AgoraWinRT::implementation
         int16_t SetLogFilter(uint16_t filter);
         int16_t SetLogFileSize(uint64_t size);
         hstring GetErrorDesc(int64_t code);
-        //ԭʼ��Ƶ����
         void RegisterAudioFrameObserver(AgoraWinRT::AudioFrameObserver const& observer);
         int16_t SetRecordingAudioFrameParameters(uint32_t sampleRate, uint8_t channels, AgoraWinRT::RAW_AUDIO_FRAME_OP_MODE_TYPE const& mode, uint32_t samplesPerCall);
         int16_t SetPlaybackAudioFrameParameters(uint32_t sampleRate, uint8_t channels, AgoraWinRT::RAW_AUDIO_FRAME_OP_MODE_TYPE const& mode, uint32_t samplesPerCall);
         int16_t SetMixedAudioFrameParameters(uint32_t sampleRate, uint32_t samplesPerCall);
-        //ԭʼ��Ƶ����
         void RegisterVideoFrameObserver(AgoraWinRT::VideoFrameObserver const& observer);
-        //��Ƶ��
         AgoraWinRT::Channel CreateChannel(hstring const& channel);
-        //�豸����
         AgoraWinRT::AudioDeviceManager GetAudioDeviceManager();
     private:
         agora::rtc::IRtcEngine* m_rtcEngine{ nullptr };

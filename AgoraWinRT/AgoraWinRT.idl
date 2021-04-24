@@ -167,6 +167,7 @@ namespace AgoraWinRT
 
 		//其他音频控制
 		Int16 EnableLoopbackRecording(Boolean enabled, String deviceName);
+		Int16 AdjustLoopbackRecordingSignalVolume(Int16 volume);
 
 		//其他视频控制
 		Int16 SetCameraCapturerConfiguration(AgoraWinRT.CameraCapturerConfiguration config);
