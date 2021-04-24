@@ -9,7 +9,7 @@ namespace AgoraWinRT
 	[default_interface]
 	unsealed runtimeclass AgoraRtc : Windows.Foundation.IClosable
 	{
-		AgoraRtc(String vendorKey);
+		AgoraRtc(AgoraWinRT.EngineContext context);
 		
 		//注册RtcEngin事件处理器
 		void RegisterRtcEngineEventHandler(AgoraWinRT.AgoraRtcEventHandler handler);
@@ -19,7 +19,9 @@ namespace AgoraWinRT
 		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type);
 		Int16 SetClientRole(AgoraWinRT.CLIENT_ROLE_TYPE type, AgoraWinRT.ClientRoleOptions options);
 		Int16 JoinChannel(String token, String channel, String info, UInt64 uid);
+		Int16 JoinChannel(String token, String channel, String info, UInt64 uid, AgoraWinRT.ChannelMediaOptions options);
 		Int16 SwitchChannel(String token, String channel);
+		Int16 SwitchChannel(String token, String channel, AgoraWinRT.ChannelMediaOptions options);
 		Int16 LeaveChannel();
 		Int16 RenewToken(String token);
 		AgoraWinRT.CONNECTION_STATE_TYPE GetConnectionState();
@@ -84,8 +86,10 @@ namespace AgoraWinRT
 		Int16 SetLocalVoiceEqualization(AgoraWinRT.AUDIO_EQUALIZATION_BAND_FREQUENCY freq, Int16 gain);
 		Int16 SetLocalVoiceReverb(AgoraWinRT.AUDIO_REVERB_TYPE type, UInt64 value);
 		Int16 SetVoiceBeautifierPreset(AgoraWinRT.VOICE_BEAUTIFIER_PRESET preset);
+		Int16 SetVoiceBeautifierParameters(AgoraWinRT.VOICE_BEAUTIFIER_PRESET preset, Int16 param1, Int16 param2);
 		Int16 SetAudioEffectPreset(AgoraWinRT.AUDIO_EFFECT_PRESET preset);
 		Int16 SetAudioEffectParameters(AgoraWinRT.AUDIO_EFFECT_PRESET preset, UInt8 param1, UInt8 param2);
+		Int16 SetVoiceConversionPreset(AgoraWinRT.VOICE_CONVERSION_PRESET preset);
 
 		//听声辩位
 		Int16 EnableSoundPositionIndication(Boolean enabled);
@@ -158,6 +162,7 @@ namespace AgoraWinRT
 
 		//流消息
 		Int64 CreateDataStream(Boolean reliable, Boolean ordered);
+		Int16 CreateDataStream(out Int64 streamId, AgoraWinRT.DataStreamConfig config);
 		Int16 SendStreamMessage(Int64 streamId, String data);
 
 		//其他音频控制
@@ -167,6 +172,8 @@ namespace AgoraWinRT
 		Int16 SetCameraCapturerConfiguration(AgoraWinRT.CameraCapturerConfiguration config);
 
 		//其他方法
+		Int16 SetCloudProxy(AgoraWinRT.CLOUD_PROXY_TYPE type);
+		Int16 EnableDeepLearningDenoise(Boolean enable);
 		Int16 SendCustomReportMessage(String id, String category, String eventName, String label, Int64 value);
 		Int16 GetCallId(out String id);
 		Int16 Rate(String callId, UInt8 rating, String desc);

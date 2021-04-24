@@ -87,6 +87,7 @@ namespace Utils {
 		stats.codecType = (winrt::AgoraWinRT::VIDEO_CODEC_TYPE)raw.codecType;
 		stats.txPacketLossRate = raw.txPacketLossRate;
 		stats.captureFrameRate = raw.captureFrameRate;
+		stats.captureBrightnessLevel = (winrt::AgoraWinRT::CAPTURE_BRIGHTNESS_LEVEL_TYPE)raw.captureBrightnessLevel;
 		return stats;
 	}
 
@@ -104,6 +105,9 @@ namespace Utils {
 		stats.frozenRate = raw.frozenRate;
 		stats.totalActiveTime = raw.totalActiveTime;
 		stats.publishDuration = raw.publishDuration;
+		stats.qoeQuality = raw.qoeQuality;
+		stats.qualityChangedReason = raw.qualityChangedReason;
+		stats.mosValue = raw.mosValue;
 		return stats;
 	}
 
@@ -128,7 +132,7 @@ namespace Utils {
 	winrt::com_array<winrt::AgoraWinRT::AudioVolumeInfo> To(const agora::rtc::AudioVolumeInfo* raw, int count) {
 		auto infos = winrt::com_array<winrt::AgoraWinRT::AudioVolumeInfo>(count);
 		for (int i = 0; i < count; i++) {
-			auto info = infos[i];
+			auto &info = infos[i];
 			info.channelId = Utils::To(raw[i].channelId);
 			info.uid = raw[i].uid;
 			info.vad = raw[i].vad;
@@ -436,10 +440,12 @@ namespace Utils {
 		return raw;
 	}
 
-	agora::rtc::CameraCapturerConfiguration To(winrt::AgoraWinRT::CameraCapturerConfiguration const& config)
+	agora::rtc::CameraCapturerConfiguration To(winrt::AgoraWinRT::CameraCapturerConfiguration const& value)
 	{
 		agora::rtc::CameraCapturerConfiguration raw;
-		raw.preference = (agora::rtc::CAPTURER_OUTPUT_PREFERENCE)config.prefernce;
+		raw.preference = (agora::rtc::CAPTURER_OUTPUT_PREFERENCE)value.prefernce;
+		raw.captureHeight = value.captureHeight;
+		raw.captureWidth = value.captureWidth;
 		return raw;
 	}
 
@@ -461,6 +467,22 @@ namespace Utils {
 	{
 		agora::rtc::ClientRoleOptions raw;
 		raw.audienceLatencyLevel = (agora::rtc::AUDIENCE_LATENCY_LEVEL_TYPE)value.audienceLatencyLevel();
+		return raw;
+	}
+
+	agora::rtc::DataStreamConfig To(winrt::AgoraWinRT::DataStreamConfig const& value)
+	{
+		agora::rtc::DataStreamConfig raw;
+		raw.ordered = value.ordered;
+		raw.syncWithAudio = value.syncWithAudio;
+		return raw;
+	}
+	agora::rtc::LogConfig To(winrt::AgoraWinRT::LogConfig const& value)
+	{
+		agora::rtc::LogConfig raw;
+		raw.filePath = value.filePath.empty() ? nullptr : Utils::To(value.filePath).c_str();
+		raw.fileSize = value.fileSize;
+		raw.level = (agora::LOG_LEVEL)value.level;
 		return raw;
 	}
 }

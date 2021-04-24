@@ -7,19 +7,22 @@
 
 namespace winrt::AgoraWinRT::implementation
 {
-	AgoraRtc::AgoraRtc(hstring const& vendorKey)
-	{
-		if (vendorKey.empty())
+	AgoraRtc::AgoraRtc(AgoraWinRT::EngineContext const& context)
+	{		
+		if (context.appId.empty())
 			throw hresult_invalid_argument(L"vendorKey is empty");
 
 		m_rtcEngine = createAgoraRtcEngine();
 		if (m_rtcEngine == nullptr)
 			throw L"createAgoraRtcEngine failed";
 
-		agora::rtc::RtcEngineContext context;
-		context.appId = Utils::Copy(vendorKey);
-		context.eventHandler = this;
-		if (m_rtcEngine->initialize(context) == 0)
+		agora::rtc::RtcEngineContext rtcContext;
+		rtcContext.appId = Utils::Copy(context.appId);
+		rtcContext.eventHandler = this;
+		//rtcContext.areaCode = (unsigned int)context.areaCode;
+		//rtcContext.logConfig = Utils::To(context.logConfig);
+
+		if (m_rtcEngine->initialize(rtcContext) == 0)
 		{
 			//ÉèÖÃIMediaEngine½Ó¿Ú
 			agora::media::IMediaEngine* media = nullptr;
@@ -62,9 +65,17 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->joinChannel(Utils::To(token).c_str(), Utils::To(channel).c_str(), Utils::To(info).c_str(), uid);
 	}
+	int16_t AgoraRtc::JoinChannel(hstring const& token, hstring const& channel, hstring const& info, uint64_t uid, AgoraWinRT::ChannelMediaOptions const& options)
+	{
+		return m_rtcEngine->joinChannel(Utils::To(token).c_str(), Utils::To(channel).c_str(), Utils::To(info).c_str(), uid, Utils::To(options));
+	}
 	int16_t AgoraRtc::SwitchChannel(hstring const& token, hstring const& channel)
 	{
 		return m_rtcEngine->switchChannel(Utils::To(token).c_str(), Utils::To(channel).c_str());
+	}
+	int16_t AgoraRtc::SwitchChannel(hstring const& token, hstring const& channel, AgoraWinRT::ChannelMediaOptions const& options)
+	{
+		return m_rtcEngine->switchChannel(Utils::To(token).c_str(), Utils::To(channel).c_str(), Utils::To(options));
 	}
 	int16_t AgoraRtc::LeaveChannel()
 	{
@@ -281,6 +292,10 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setVoiceBeautifierPreset((agora::rtc::VOICE_BEAUTIFIER_PRESET)preset);
 	}
+	int16_t AgoraRtc::SetVoiceBeautifierParameters(AgoraWinRT::VOICE_BEAUTIFIER_PRESET const& preset, int16_t param1, int16_t param2)
+	{
+		return m_rtcEngine->setVoiceBeautifierParameters((agora::rtc::VOICE_BEAUTIFIER_PRESET)preset, param1, param2);
+	}
 	int16_t AgoraRtc::SetAudioEffectPreset(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset)
 	{
 		return m_rtcEngine->setAudioEffectPreset((agora::rtc::AUDIO_EFFECT_PRESET)preset);
@@ -288,6 +303,10 @@ namespace winrt::AgoraWinRT::implementation
 	int16_t AgoraRtc::SetAudioEffectParameters(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset, uint8_t param1, uint8_t param2)
 	{
 		return m_rtcEngine->setAudioEffectParameters((agora::rtc::AUDIO_EFFECT_PRESET)preset, param1, param2);
+	}
+	int16_t AgoraRtc::SetVoiceConversionPreset(AgoraWinRT::VOICE_CONVERSION_PRESET const& preset)
+	{
+		return m_rtcEngine->setVoiceConversionPreset((agora::rtc::VOICE_CONVERSION_PRESET)preset);
 	}
 	int16_t AgoraRtc::EnableSoundPositionIndication(bool enabled)
 	{
@@ -462,6 +481,13 @@ namespace winrt::AgoraWinRT::implementation
 		auto result = m_rtcEngine->createDataStream(&streamId, reliable, ordered);
 		return result == 0 ? streamId : result;
 	}
+	int64_t AgoraRtc::CreateDataStream(int64_t& streamId, AgoraWinRT::DataStreamConfig const& config)
+	{
+		int id;
+		auto result = m_rtcEngine->createDataStream(&id, Utils::To(config));
+		streamId = id;
+		return result;
+	}
 	int16_t AgoraRtc::SendStreamMessage(int64_t streamId, hstring const& data)
 	{
 		auto msg = Utils::To(data);
@@ -474,6 +500,14 @@ namespace winrt::AgoraWinRT::implementation
 	int16_t AgoraRtc::SetCameraCapturerConfiguration(AgoraWinRT::CameraCapturerConfiguration const& config)
 	{
 		return m_rtcEngine->setCameraCapturerConfiguration(Utils::To(config));
+	}
+	int16_t AgoraRtc::SetCloudProxy(AgoraWinRT::CLOUD_PROXY_TYPE const& type)
+	{
+		return m_rtcEngine->setCloudProxy((agora::rtc::CLOUD_PROXY_TYPE)type);
+	}
+	int16_t AgoraRtc::EnableDeepLearningDenoise(bool enabled)
+	{
+		return m_rtcEngine->enableDeepLearningDenoise(enabled);
 	}
 	int16_t AgoraRtc::SendCustomReportMessage(hstring const& id, hstring const& category, hstring const& eventName, hstring const& label, int64_t value)
 	{
@@ -719,7 +753,7 @@ namespace winrt::AgoraWinRT::implementation
 		if (m_handler) {
 			auto speakerArray = Utils::To(speakers, speakerNumber);
 			m_handler.OnAudioVolumeIndication(speakerArray, totalVolume);
-			speakerArray.clear();
+			//speakerArray.clear();
 		}
 	}
 	void AgoraRtc::onActiveSpeaker(agora::rtc::uid_t uid)

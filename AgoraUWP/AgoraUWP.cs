@@ -43,7 +43,34 @@ namespace AgoraUWP
             await mediaCapture.InitializeAsync();
         }
 
-        public AgoraRtc(string vendorKey) : base(vendorKey)
+        public AgoraRtc(string vendorKey) :
+            base(new EngineContext()
+            {
+                appId = vendorKey,
+                areaCode = AREA_CODE.AREA_CODE_GLOB,
+                logConfig = new LogConfig() { filePath = String.Empty, fileSize = -1, level = LOG_LEVEL.LOG_LEVEL_INFO }
+            })
+        {
+            init();
+        }
+
+        public AgoraRtc(string vendorKey, AREA_CODE areaCode) :
+            base(new EngineContext()
+            {
+                appId = vendorKey,
+                areaCode = areaCode,
+                logConfig = new LogConfig() { filePath = String.Empty, fileSize = -1, level = LOG_LEVEL.LOG_LEVEL_INFO }
+            })
+        {
+
+        }
+
+        public AgoraRtc(EngineContext context): base(context)
+        {
+            init();
+        }
+
+        private void init()
         {
             base.RegisterRtcEngineEventHandler(this);
             base.RegisterVideoFrameObserver(this);
