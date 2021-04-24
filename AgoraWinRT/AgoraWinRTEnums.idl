@@ -588,5 +588,12 @@ namespace AgoraWinRT
 		*/
 		AUDIO_MIXING_REASON_RESUMED_BY_USER = 726,
 	};
-
+	enum AUDIO_RECORDING_POSITION {
+		/** The SDK will record the voices of all users in the channel. */
+		AUDIO_RECORDING_POSITION_MIXED_RECORDING_AND_PLAYBACK = 0,
+		/** The SDK will record the voice of the local user. */
+		AUDIO_RECORDING_POSITION_RECORDING = 1,
+		/** The SDK will record the voices of remote users. */
+		AUDIO_RECORDING_POSITION_MIXED_PLAYBACK = 2,
+	};
 }

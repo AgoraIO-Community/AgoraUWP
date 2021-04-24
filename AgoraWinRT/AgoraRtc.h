@@ -74,6 +74,9 @@ namespace winrt::AgoraWinRT::implementation
         int16_t PauseAllEffect();
         int16_t ResumeEffect(uint64_t soundId);
         int16_t ResumeAllEffect();  
+        uint64_t GetEffectDuration(hstring const& file);
+        int16_t SetEffectPosition(uint64_t soundId, uint64_t pos);
+        uint64_t GetEffectCurrentPosition(uint64_t soundId);
         int16_t SetLocalVoiceChanger(AgoraWinRT::VOICE_CHANGER_PRESET const& changer);
         int16_t SetLocalVoiceReverbPreset(AgoraWinRT::AUDIO_REVERB_PRESET const& preset);
         int16_t SetLocalVoicePitch(float pitch);
@@ -96,20 +99,16 @@ namespace winrt::AgoraWinRT::implementation
         int16_t EnableDualStreamMode(bool enabled);
         int16_t SetRemoteVideoStreamType(uint64_t uid, AgoraWinRT::REMOTE_VIDEO_STREAM_TYPE const& type);
         int16_t SetRemoteDefaultVideoStreamType(AgoraWinRT::REMOTE_VIDEO_STREAM_TYPE const& type);
-        //��Ƶ������
         int16_t SetLocalPublishFallbackOption(AgoraWinRT::STREAM_FALLBACK_OPTIONS const& option);
         int16_t SetRemoteSubscribeFallbackOption(AgoraWinRT::STREAM_FALLBACK_OPTIONS const& option);
         int16_t SetRemoteUserPriority(uint64_t uid, AgoraWinRT::PRIORITY_TYPE const& type);
-        //ͨ��ǰ��������
         int16_t StartEchoTest(uint8_t interval);
         int16_t StopEchoTest();
         int16_t EnableLastmileTest();
         int16_t DisableLastmileTest();
         int16_t StartLastmileProbeTest(AgoraWinRT::LastmileProbeConfig const& config);
         int16_t StopLastmileProbeTest();
-        //������ƵԴ
         bool SetVideoSource(AgoraWinRT::VideoSource const& source);
-        //��Ƶ�Բɼ�
         int16_t SetExternalVideoSource(bool enable, bool useTexture);
         int16_t PushVideoFrame(AgoraWinRT::ExternalVideoFrame const& frame);
         int16_t SetExternalAudioSource(bool enable, uint32_t sampleRate, uint8_t channels);
@@ -120,7 +119,7 @@ namespace winrt::AgoraWinRT::implementation
         int16_t ClearVideoWatermark();
         int16_t EnableEncryption(bool enable, AgoraWinRT::EncryptionConfig const& config);
         void RegisterPacketObserver(AgoraWinRT::PacketObserver const& observer);
-        int16_t StartAudioRecording(hstring const& file, uint32_t sampleRate, AgoraWinRT::AUDIO_RECORDING_QUALITY_TYPE const& type);
+        int16_t StartAudioRecording(AgoraWinRT::AudioRecordingConfiguration const& config);
         int16_t StopAudioRecording();
         int16_t AddInjectStreamUrl(hstring const& url, AgoraWinRT::InjectStreamConfig const& config);
         int16_t RemoveInjectStreamUrl(hstring const& url);

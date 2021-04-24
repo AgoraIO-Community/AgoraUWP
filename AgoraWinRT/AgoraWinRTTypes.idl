@@ -339,4 +339,12 @@ namespace AgoraWinRT
         AgoraWinRT.AREA_CODE areaCode;
         AgoraWinRT.LogConfig logConfig;
     };
+    struct AudioRecordingConfiguration 
+    {
+        String filePath;
+        AgoraWinRT.AUDIO_RECORDING_QUALITY_TYPE recordingQuality;
+        AgoraWinRT.AUDIO_RECORDING_POSITION recordingPosition;
+        UInt8 recordingSampleRate;
+    };
+
 }

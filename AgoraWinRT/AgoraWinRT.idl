@@ -78,6 +78,9 @@ namespace AgoraWinRT
 		Int16 PauseAllEffect();
 		Int16 ResumeEffect(UInt64 soundId);
 		Int16 ResumeAllEffect();
+		UInt64 GetEffectDuration(String file);
+		Int16 SetEffectPosition(UInt64 soundId, UInt64 pos);
+		UInt64 GetEffectCurrentPosition(UInt64 soundId);
 
 		//变身与混响
 		Int16 SetLocalVoiceChanger(AgoraWinRT.VOICE_CHANGER_PRESET changer);
@@ -153,7 +156,7 @@ namespace AgoraWinRT
 		void RegisterPacketObserver(AgoraWinRT.PacketObserver observer);
 
 		//音频录制
-		Int16 StartAudioRecording(String file, UInt32 sampleRate, AgoraWinRT.AUDIO_RECORDING_QUALITY_TYPE type);
+		Int16 StartAudioRecording(AgoraWinRT.AudioRecordingConfiguration config);
 		Int16 StopAudioRecording();
 
 		//直播输入在线媒体流

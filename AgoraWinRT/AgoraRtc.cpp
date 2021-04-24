@@ -268,6 +268,18 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->resumeAllEffects();
 	}
+	uint64_t AgoraRtc::GetEffectDuration(hstring const& file)
+	{
+		return m_rtcEngine->getEffectDuration(Utils::Copy(file));
+	}
+	int16_t AgoraRtc::SetEffectPosition(uint64_t soundId, uint64_t pos)
+	{
+		return m_rtcEngine->setEffectPosition(soundId, pos);
+	}
+	uint64_t AgoraRtc::GetEffectCurrentPosition(uint64_t soundId)
+	{
+		return m_rtcEngine->getEffectCurrentPosition(soundId);
+	}
 	int16_t AgoraRtc::SetLocalVoiceChanger(AgoraWinRT::VOICE_CHANGER_PRESET const& changer)
 	{
 		return m_rtcEngine->setLocalVoiceChanger((agora::rtc::VOICE_CHANGER_PRESET)changer);
@@ -459,9 +471,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		m_packetObserver = observer;
 	}
-	int16_t AgoraRtc::StartAudioRecording(hstring const& file, uint32_t sampleRate, AgoraWinRT::AUDIO_RECORDING_QUALITY_TYPE const& type)
+	int16_t AgoraRtc::StartAudioRecording(AgoraWinRT::AudioRecordingConfiguration const& config)
 	{
-		return m_rtcEngine->startAudioRecording(Utils::To(file).c_str(), (agora::rtc::AUDIO_RECORDING_QUALITY_TYPE)type);
+		return m_rtcEngine->startAudioRecording(Utils::To(config));
 	}
 	int16_t AgoraRtc::StopAudioRecording()
 	{
