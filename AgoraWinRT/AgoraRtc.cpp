@@ -232,9 +232,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setVolumeOfEffect(soundId, volume);
 	}
-	int16_t AgoraRtc::PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish)
+	int16_t AgoraRtc::PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish, uint64_t startPos)
 	{
-		return m_rtcEngine->playEffect(soundId, Utils::To(file).c_str(), loopCount, pitch, pan, gain, publish);
+		return m_rtcEngine->playEffect(soundId, Utils::To(file).c_str(), loopCount, pitch, pan, gain, publish, startPos);
 	}
 	int16_t AgoraRtc::StopEffect(uint64_t soundId)
 	{

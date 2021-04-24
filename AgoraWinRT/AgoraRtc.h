@@ -62,11 +62,10 @@ namespace winrt::AgoraWinRT::implementation
         int16_t GetAudioMixingCurrentPosition();
         int16_t SetAudioMixingPosition(uint64_t pos);
         int16_t SetAudioMixingPitch(int16_t pitch);
-        //��Ч�ļ����Ź���
         int16_t GetEffectsVolume();
         int16_t SetEffectsVolume(uint16_t volume);
         int16_t SetVolumeOfEffect(uint64_t soundId, uint16_t volume);
-        int16_t PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish);
+        int16_t PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish, uint64_t startPos);
         int16_t StopEffect(uint64_t soundId);
         int16_t StopAllEffect();
         int16_t PreloadEffect(uint64_t soundId, hstring const& file);
@@ -75,7 +74,6 @@ namespace winrt::AgoraWinRT::implementation
         int16_t PauseAllEffect();
         int16_t ResumeEffect(uint64_t soundId);
         int16_t ResumeAllEffect();  
-        //����������
         int16_t SetLocalVoiceChanger(AgoraWinRT::VOICE_CHANGER_PRESET const& changer);
         int16_t SetLocalVoiceReverbPreset(AgoraWinRT::AUDIO_REVERB_PRESET const& preset);
         int16_t SetLocalVoicePitch(float pitch);
@@ -86,20 +84,15 @@ namespace winrt::AgoraWinRT::implementation
         int16_t SetAudioEffectPreset(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset);
         int16_t SetAudioEffectParameters(AgoraWinRT::AUDIO_EFFECT_PRESET const& preset, uint8_t param1, uint8_t param2);
         int16_t SetVoiceConversionPreset(AgoraWinRT::VOICE_CONVERSION_PRESET const& preset);
-        //������λ
         int16_t EnableSoundPositionIndication(bool enabled);
         int16_t SetRemoteVoicePosition(uint64_t uid, float pan, float gain);
-        //CDN����
         int16_t SetLiveTranscoding(AgoraWinRT::LiveTranscoding const& transcoding);
         int16_t AddPublishStreamUrl(hstring const& url, bool enabled);
         int16_t RemovePublishStreamUrl(hstring const& url);
-        //��Ƶ��ý����ת��
         int16_t StartChannelMediaRelay(AgoraWinRT::ChannelMediaRelayConfiguration const& config);
         int16_t UpdateChannelMediaRelay(AgoraWinRT::ChannelMediaRelayConfiguration const& config);
         int16_t StopChannelMediaRelay();
-        //������ʾ
         int16_t EnableAudioVolumeIndication(int32_t interval, uint8_t smooth, bool report);
-        //��Ƶ˫��ģʽ
         int16_t EnableDualStreamMode(bool enabled);
         int16_t SetRemoteVideoStreamType(uint64_t uid, AgoraWinRT::REMOTE_VIDEO_STREAM_TYPE const& type);
         int16_t SetRemoteDefaultVideoStreamType(AgoraWinRT::REMOTE_VIDEO_STREAM_TYPE const& type);

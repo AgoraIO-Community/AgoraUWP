@@ -69,7 +69,7 @@ namespace AgoraWinRT
 		Int16 GetEffectsVolume();
 		Int16 SetEffectsVolume(UInt16 volume);
 		Int16 SetVolumeOfEffect(UInt64 soundId, UInt16 volume);
-		Int16 PlayEffect(UInt64 soundId, String file, Int16 loopCount, Single pitch, Single pan, Single gain, Boolean publish);
+		Int16 PlayEffect(UInt64 soundId, String file, Int16 loopCount, Single pitch, Single pan, Single gain, Boolean publish, UInt64 startPos);
 		Int16 StopEffect(UInt64 soundId);
 		Int16 StopAllEffect();
 		Int16 PreloadEffect(UInt64 soundId, String file);
