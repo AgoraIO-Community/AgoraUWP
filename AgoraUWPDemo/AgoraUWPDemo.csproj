@@ -146,7 +146,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="agora_rtc_sdk.dll">
+    <Content Include="av1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="libagora-core.dll">
@@ -164,7 +164,16 @@
     <Content Include="libagora-soundtouch.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="libagora-wgc.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="libagora_ai_denoise_extension.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libagora_dav1d_extension.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="libagora_jnd_extension.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="libhwcodec.dll">

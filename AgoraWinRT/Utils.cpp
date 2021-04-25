@@ -485,4 +485,13 @@ namespace Utils {
 		raw.level = (agora::LOG_LEVEL)value.level;
 		return raw;
 	}
+	agora::rtc::AudioRecordingConfiguration To(winrt::AgoraWinRT::AudioRecordingConfiguration const& value)
+	{
+		agora::rtc::AudioRecordingConfiguration raw;
+		raw.filePath = value.filePath.empty() ? nullptr : Utils::To(value.filePath).c_str();
+		raw.recordingPosition = (agora::rtc::AUDIO_RECORDING_POSITION)value.recordingPosition;
+		raw.recordingQuality = (agora::rtc::AUDIO_RECORDING_QUALITY_TYPE)value.recordingQuality;
+		raw.recordingSampleRate = value.recordingSampleRate;
+		return raw;
+	}
 }

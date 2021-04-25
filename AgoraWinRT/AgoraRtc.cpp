@@ -172,9 +172,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setBeautyEffectOptions(enabled, Utils::To(options));
 	}
-	int16_t AgoraRtc::StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle)
+	int16_t AgoraRtc::StartAudioMixing(hstring const& file, bool loopback, bool replace, int32_t cycle, uint64_t startPos)
 	{
-		return m_rtcEngine->startAudioMixing(Utils::To(file).c_str(), loopback, replace, cycle);
+		return m_rtcEngine->startAudioMixing(Utils::To(file).c_str(), loopback, replace, cycle, startPos);
 	}
 	int16_t AgoraRtc::StopAudioMixing()
 	{
@@ -204,9 +204,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->getAudioMixingPublishVolume();
 	}
-	int16_t AgoraRtc::GetAudioMixingDuration()
+	uint64_t AgoraRtc::GetAudioMixingDuration(hstring const& file)
 	{
-		return m_rtcEngine->getAudioMixingDuration();
+		return m_rtcEngine->getAudioMixingDuration(Utils::To(file).c_str());
 	}
 	int16_t AgoraRtc::GetAudioMixingCurrentPosition()
 	{
@@ -232,9 +232,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		return m_rtcEngine->setVolumeOfEffect(soundId, volume);
 	}
-	int16_t AgoraRtc::PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish)
+	int16_t AgoraRtc::PlayEffect(uint64_t soundId, hstring const& file, int16_t loopCount, float pitch, float pan, float gain, bool publish, uint64_t startPos)
 	{
-		return m_rtcEngine->playEffect(soundId, Utils::To(file).c_str(), loopCount, pitch, pan, gain, publish);
+		return m_rtcEngine->playEffect(soundId, Utils::To(file).c_str(), loopCount, pitch, pan, gain, publish, startPos);
 	}
 	int16_t AgoraRtc::StopEffect(uint64_t soundId)
 	{
@@ -267,6 +267,18 @@ namespace winrt::AgoraWinRT::implementation
 	int16_t AgoraRtc::ResumeAllEffect()
 	{
 		return m_rtcEngine->resumeAllEffects();
+	}
+	uint64_t AgoraRtc::GetEffectDuration(hstring const& file)
+	{
+		return m_rtcEngine->getEffectDuration(Utils::Copy(file));
+	}
+	int16_t AgoraRtc::SetEffectPosition(uint64_t soundId, uint64_t pos)
+	{
+		return m_rtcEngine->setEffectPosition(soundId, pos);
+	}
+	uint64_t AgoraRtc::GetEffectCurrentPosition(uint64_t soundId)
+	{
+		return m_rtcEngine->getEffectCurrentPosition(soundId);
 	}
 	int16_t AgoraRtc::SetLocalVoiceChanger(AgoraWinRT::VOICE_CHANGER_PRESET const& changer)
 	{
@@ -459,9 +471,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		m_packetObserver = observer;
 	}
-	int16_t AgoraRtc::StartAudioRecording(hstring const& file, uint32_t sampleRate, AgoraWinRT::AUDIO_RECORDING_QUALITY_TYPE const& type)
+	int16_t AgoraRtc::StartAudioRecording(AgoraWinRT::AudioRecordingConfiguration const& config)
 	{
-		return m_rtcEngine->startAudioRecording(Utils::To(file).c_str(), (agora::rtc::AUDIO_RECORDING_QUALITY_TYPE)type);
+		return m_rtcEngine->startAudioRecording(Utils::To(config));
 	}
 	int16_t AgoraRtc::StopAudioRecording()
 	{
@@ -496,6 +508,10 @@ namespace winrt::AgoraWinRT::implementation
 	int16_t AgoraRtc::EnableLoopbackRecording(bool enabled, hstring const& deviceName)
 	{
 		return m_rtcEngine->enableLoopbackRecording(enabled, Utils::To(deviceName).c_str());
+	}
+	int16_t AgoraRtc::AdjustLoopbackRecordingSignalVolume(int16_t volume)
+	{
+		return m_rtcEngine->adjustLoopbackRecordingSignalVolume(volume);
 	}
 	int16_t AgoraRtc::SetCameraCapturerConfiguration(AgoraWinRT::CameraCapturerConfiguration const& config)
 	{
@@ -709,9 +725,9 @@ namespace winrt::AgoraWinRT::implementation
 	{
 		if (m_handler) m_handler.OnRemoteVideoStats(Utils::To(stats));
 	}
-	void AgoraRtc::onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_ERROR_TYPE error)
+	void AgoraRtc::onAudioMixingStateChanged(agora::rtc::AUDIO_MIXING_STATE_TYPE state, agora::rtc::AUDIO_MIXING_REASON_TYPE reason)
 	{
-		if (m_handler) m_handler.OnAudioMixingStateChanged((AgoraWinRT::AUDIO_MIXING_STATE_TYPE)state, (AgoraWinRT::AUDIO_MIXING_ERROR_TYPE)error);
+		if (m_handler) m_handler.OnAudioMixingStateChanged((AgoraWinRT::AUDIO_MIXING_STATE_TYPE)state, (AgoraWinRT::AUDIO_MIXING_REASON_TYPE)reason);
 	}
 	void AgoraRtc::onRemoteAudioMixingBegin()
 	{

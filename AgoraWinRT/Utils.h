@@ -94,4 +94,6 @@ namespace Utils {
 	agora::rtc::DataStreamConfig To(winrt::AgoraWinRT::DataStreamConfig const& value);
 
 	agora::rtc::LogConfig To(winrt::AgoraWinRT::LogConfig const& value);
+
+	agora::rtc::AudioRecordingConfiguration To(winrt::AgoraWinRT::AudioRecordingConfiguration const& value);
 }

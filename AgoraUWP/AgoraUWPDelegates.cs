@@ -37,7 +37,7 @@ namespace AgoraUWP
     public delegate void OnLocalVideoStatsDelegate(LocalVideoStats stats);
     public delegate void OnRemoteAudioStatsDelegate(RemoteAudioStats stats);
     public delegate void OnRemoteVideoStatsDelegate(RemoteVideoStats stats);
-    public delegate void OnAudioMixingStateChangedDelegate(AUDIO_MIXING_STATE_TYPE state, AUDIO_MIXING_ERROR_TYPE error);
+    public delegate void OnAudioMixingStateChangedDelegate(AUDIO_MIXING_STATE_TYPE state, AUDIO_MIXING_REASON_TYPE error);
     public delegate void OnRemoteAudioMixingBeginDelegate();
     public delegate void OnRemoteAudioMixingEndDelegate();
     public delegate void OnAudioEffectFinishedDelegate(ulong soundId);

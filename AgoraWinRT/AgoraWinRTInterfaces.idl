@@ -39,7 +39,7 @@ namespace AgoraWinRT
 		void OnRemoteAudioStats(AgoraWinRT.RemoteAudioStats stats);
 		void OnRemoteVideoStats(AgoraWinRT.RemoteVideoStats stats);
 		//音乐文件播放及混音
-		void OnAudioMixingStateChanged(AgoraWinRT.AUDIO_MIXING_STATE_TYPE state, AgoraWinRT.AUDIO_MIXING_ERROR_TYPE error);
+		void OnAudioMixingStateChanged(AgoraWinRT.AUDIO_MIXING_STATE_TYPE state, AgoraWinRT.AUDIO_MIXING_REASON_TYPE error);
 		void OnRemoteAudioMixingBegin();
 		void OnRemoteAudioMixingEnd();
 		//音效文件播放管理
