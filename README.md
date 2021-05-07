@@ -2,6 +2,12 @@
 
 *English* ｜ [**中文**](README.zh.md)
 
+**
+
+**NOTE: This community SDK supports Hololens 1 only. There is no support for Hololens 2 yet but Agora is working on that right now.**
+
+**  
+
 In UWP, Agora C++ Native Development kit cannot get the camera and microphone permission because they should be explicitly applying, and there is no handle property in UWP on Windows, Agora C++ Native also cannot render video data by default function like setupLocalVideo and setupRemoteVideo. On the other hand, UWP development is more friendly to C# users.
 
 Based on those reasons, this project encapsulates native c++ kit to WinRT kit, and based on the WinRT kit, it encapsulates the UWP kit to manage video and audio devices. If you are a C++ user, you can also directly use the WinRT kit for development.
