@@ -304,6 +304,8 @@ namespace AgoraWinRT
     {
         Boolean autoSubscribeAudio;
         Boolean autoSubscribeVideo;
+        Boolean publishLocalAudio;
+        Boolean publishLocalVideo;
     };
     runtimeclass VideoSourceConsumer
     {

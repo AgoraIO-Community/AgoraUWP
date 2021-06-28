@@ -455,6 +455,8 @@ namespace Utils {
 		agora::rtc::ChannelMediaOptions raw;
 		raw.autoSubscribeAudio = value.autoSubscribeAudio;
 		raw.autoSubscribeVideo = value.autoSubscribeVideo;
+		raw.publishLocalAudio = value.publishLocalAudio;
+		raw.publishLocalVideo = value.publishLocalVideo;
 		return raw;
 	}
 
