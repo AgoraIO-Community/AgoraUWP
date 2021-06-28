@@ -17,7 +17,9 @@ namespace winrt::AgoraWinRT::implementation
 		int16_t JoinChannel(hstring const& token, hstring const& info, uint64_t uid, AgoraWinRT::ChannelMediaOptions const& options);
 		int16_t JoinChannelWithUserAccount(hstring const& token, hstring const& account, AgoraWinRT::ChannelMediaOptions const& options);
 		int16_t LeaveChannel();
+		[[DEPRECATED]]
 		int16_t Publish();
+		[[DEPRECATED]]
 		int16_t Unpublish();
 		hstring ChannelId();
 		int16_t GetCallId(hstring& callId);
@@ -52,6 +54,9 @@ namespace winrt::AgoraWinRT::implementation
 		int16_t StopChannelMediaRelay();
 		AgoraWinRT::CONNECTION_STATE_TYPE GetConnectionState();
 		void Close();
+
+		int16_t MuteLocalAudioStream(bool mute);
+		int16_t MuteLocalVideoStream(bool mute);
 	private:
 		AgoraWinRT::ChannelEventHandler m_eventHandler{ nullptr };
 		agora::rtc::IChannel* m_channel{ nullptr };

@@ -256,10 +256,11 @@ namespace AgoraWinRT
         AgoraWinRT.Rectangle positionInLandscapeMode;
         AgoraWinRT.Rectangle positionInProtraitMode;
     };
-    struct EncryptionConfig
+    runtimeclass EncryptionConfig: Windows.Foundation.IClosable
     {
         AgoraWinRT.ENCRYPTION_MODE mode;
         String key;
+        UInt8[] salt;
     };
     runtimeclass Packet: Windows.Foundation.IClosable
     {
@@ -303,6 +304,8 @@ namespace AgoraWinRT
     {
         Boolean autoSubscribeAudio;
         Boolean autoSubscribeVideo;
+        Boolean publishLocalAudio;
+        Boolean publishLocalVideo;
     };
     runtimeclass VideoSourceConsumer
     {

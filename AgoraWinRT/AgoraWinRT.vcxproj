@@ -124,6 +124,7 @@
     <ClInclude Include="Channel.h" />
     <ClInclude Include="ChannelMediaRelayConfiguration.h" />
     <ClInclude Include="ClientRoleOptions.h" />
+    <ClInclude Include="EncryptionConfig.h" />
     <ClInclude Include="ExternalVideoFrame.h" />
     <ClInclude Include="LiveTranscoding.h" />
     <ClInclude Include="Metadata.h" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Channel.cpp" />
     <ClCompile Include="ChannelMediaRelayConfiguration.cpp" />
     <ClCompile Include="ClientRoleOptions.cpp" />
+    <ClCompile Include="EncryptionConfig.cpp" />
     <ClCompile Include="ExternalVideoFrame.cpp" />
     <ClCompile Include="LiveTranscoding.cpp" />
     <ClCompile Include="Metadata.cpp" />
