@@ -422,8 +422,10 @@ namespace Utils {
 
 	agora::rtc::EncryptionConfig To(winrt::AgoraWinRT::EncryptionConfig const& value) {
 		agora::rtc::EncryptionConfig raw;
-		raw.encryptionMode = (agora::rtc::ENCRYPTION_MODE)value.mode;
-		raw.encryptionKey = Utils::Copy(value.key);
+		raw.encryptionMode = (agora::rtc::ENCRYPTION_MODE)value.mode();
+		raw.encryptionKey = Utils::Copy(value.key());
+		auto salt = reinterpret_cast<uint8_t*>(Utils::To(value.salt()));
+		memcpy(raw.encryptionKdfSalt, salt, sizeof(raw.encryptionKdfSalt));
 		return raw;
 	}
 

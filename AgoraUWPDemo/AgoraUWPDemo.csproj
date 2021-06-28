@@ -146,39 +146,19 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="av1.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-core.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-fdkaac.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-ffmpeg.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-mpg123.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-soundtouch.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora-wgc.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora_ai_denoise_extension.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora_dav1d_extension.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libagora_jnd_extension.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libhwcodec.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="agora_rtc_sdk.dll" />
+    <Content Include="av1.dll" />
+    <Content Include="libagora-core.dll" />
+    <Content Include="libagora-fdkaac.dll" />
+    <Content Include="libagora-ffmpeg.dll" />
+    <Content Include="libagora-mpg123.dll" />
+    <Content Include="libagora-soundtouch.dll" />
+    <Content Include="libagora-wgc.dll" />
+    <Content Include="libagora_ai_denoise_extension.dll" />
+    <Content Include="libagora_dav1d_extension.dll" />
+    <Content Include="libagora_jnd_extension.dll" />
+    <Content Include="libagora_segmentation_extension.dll" />
+    <Content Include="libhwcodec.dll" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

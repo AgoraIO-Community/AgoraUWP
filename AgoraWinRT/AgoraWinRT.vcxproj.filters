@@ -29,6 +29,7 @@
     <ClCompile Include="AudioDeviceCollection.cpp" />
     <ClCompile Include="AudioDeviceManager.cpp" />
     <ClCompile Include="ClientRoleOptions.cpp" />
+    <ClCompile Include="EncryptionConfig.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="AudioDeviceCollection.h" />
     <ClInclude Include="AudioDeviceManager.h" />
     <ClInclude Include="ClientRoleOptions.h" />
+    <ClInclude Include="EncryptionConfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AgoraWinRT.def" />
