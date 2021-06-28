@@ -178,6 +178,14 @@ namespace winrt::AgoraWinRT::implementation
     {
         if (m_channel) m_channel->release();
     }
+    int16_t Channel::MuteLocalAudioStream(bool mute)
+    {
+        return m_channel->muteLocalAudioStream(mute);
+    }
+    int16_t Channel::MuteLocalVideoStream(bool mute)
+    {
+        return m_channel->muteLocalVideoStream(mute);
+    }
     bool Channel::onSendAudioPacket(Packet& packet)
     {
         if (m_packetObserver) {

@@ -82,5 +82,8 @@ namespace AgoraWinRT
 		Int16 UpdateChannelMediaRelay(AgoraWinRT.ChannelMediaRelayConfiguration config);
 		Int16 StopChannelMediaRelay();
 		AgoraWinRT.CONNECTION_STATE_TYPE GetConnectionState();
+
+		Int16 MuteLocalAudioStream(Boolean mute);
+		Int16 MuteLocalVideoStream(Boolean mute);
 	};
 }

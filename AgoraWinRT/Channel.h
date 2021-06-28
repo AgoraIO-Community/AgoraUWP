@@ -52,6 +52,9 @@ namespace winrt::AgoraWinRT::implementation
 		int16_t StopChannelMediaRelay();
 		AgoraWinRT::CONNECTION_STATE_TYPE GetConnectionState();
 		void Close();
+
+		int16_t MuteLocalAudioStream(bool mute);
+		int16_t MuteLocalVideoStream(bool mute);
 	private:
 		AgoraWinRT::ChannelEventHandler m_eventHandler{ nullptr };
 		agora::rtc::IChannel* m_channel{ nullptr };
